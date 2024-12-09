@@ -62,6 +62,12 @@ public class GameController extends InputAdapter {
         if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
             player.revive(100);
         }
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            player.damage(20);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
+            player.revive(100);
+        }
     }
 
     @Override

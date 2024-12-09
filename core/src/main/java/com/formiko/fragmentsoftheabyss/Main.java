@@ -23,6 +23,7 @@ public class Main extends ApplicationAdapter {
     private PlayerUIView playerUIView;
     private BoxView boxView;
     private Box box;
+    private PlayerUIView playerUIView;
 
 
     @Override
@@ -70,6 +71,7 @@ public class Main extends ApplicationAdapter {
         boxView.render(box);
         playerUIView.render(player);
         boxView.render(box);
+        playerUIView.render(player);
     }
 
     @Override
@@ -79,5 +81,6 @@ public class Main extends ApplicationAdapter {
         boxView.dispose();
         playerUIView.dispose();
         boxView.dispose();
+        playerUIView.dispose();
     }
 }
