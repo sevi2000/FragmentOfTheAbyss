@@ -28,4 +28,16 @@ public class Player extends Entity{
         this.defense = defense;
         this.name = name;
     }
+
+    public void damage(int damage){
+        if (this.health > damage)
+            this.health-=damage;
+        else this.health = 0;
+    }
+
+    public void revive(int life){
+        if (this.health < this.maxHealth + life)
+            this.health+=life;
+        else this.health = maxHealth;
+    }
 }
