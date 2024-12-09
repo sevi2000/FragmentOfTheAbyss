@@ -9,6 +9,7 @@ import com.formiko.fragmentsoftheabyss.model.entity.Player;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 import com.formiko.fragmentsoftheabyss.view.BoxView;
 import com.formiko.fragmentsoftheabyss.view.GameView;
+import com.formiko.fragmentsoftheabyss.view.PlayerUIView;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends ApplicationAdapter {
@@ -19,6 +20,7 @@ public class Main extends ApplicationAdapter {
     private GameController gameController;
     private BoxView boxView;
     private Box box;
+    private PlayerUIView playerUIView;
 
 
     @Override
@@ -27,8 +29,8 @@ public class Main extends ApplicationAdapter {
 
         player = Player.builder()
                 .id(EntityType.PLAYER)
-                .health(100)
-                .maxHealth(100)
+                .health(1000)
+                .maxHealth(1000)
                 .speed(1)
                 .x(0)
                 .y(0)
@@ -40,6 +42,8 @@ public class Main extends ApplicationAdapter {
                 .experience(0)
                 .build();
 
+        /* View */
+        playerUIView = new PlayerUIView();
         gameView = new GameView();
 
         gameController = new GameController(player);
@@ -62,6 +66,7 @@ public class Main extends ApplicationAdapter {
         gameView.render(batch, player);
         batch.end();
         boxView.render(box);
+        playerUIView.render(player);
     }
 
     @Override
@@ -69,5 +74,6 @@ public class Main extends ApplicationAdapter {
         batch.dispose();
         gameView.dispose();
         boxView.dispose();
+        playerUIView.dispose();
     }
 }
