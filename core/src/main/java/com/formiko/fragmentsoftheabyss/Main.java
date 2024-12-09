@@ -21,6 +21,8 @@ public class Main extends ApplicationAdapter {
     private BoxView boxView;
     private Box box;
     private PlayerUIView playerUIView;
+    private BoxView boxView;
+    private Box box;
 
 
     @Override
@@ -67,6 +69,7 @@ public class Main extends ApplicationAdapter {
         batch.end();
         boxView.render(box);
         playerUIView.render(player);
+        boxView.render(box);
     }
 
     @Override
@@ -75,5 +78,6 @@ public class Main extends ApplicationAdapter {
         gameView.dispose();
         boxView.dispose();
         playerUIView.dispose();
+        boxView.dispose();
     }
 }
