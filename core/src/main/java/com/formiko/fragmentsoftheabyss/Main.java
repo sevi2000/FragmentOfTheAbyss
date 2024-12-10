@@ -21,9 +21,6 @@ public class Main extends ApplicationAdapter {
     private BoxView boxView;
     private Box box;
     private PlayerUIView playerUIView;
-    private BoxView boxView;
-    private Box box;
-    private PlayerUIView playerUIView;
 
 
     @Override
