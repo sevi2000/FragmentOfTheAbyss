@@ -51,6 +51,12 @@ public class Main extends ApplicationAdapter {
         boxView = new BoxView();
         box = Box.fromString("Wall size=(80,80) position=(5,10)");
                 gameController.items.add(box);
+                if (box.toString().equals("Wall size=(80,80) position=(5,10)")) {
+                    System.out.println("Convertion works");
+                } else {    
+                    System.out.println("Convertion does not work"); 
+                }
+                System.out.println(box.toString());
     }
 
     @Override

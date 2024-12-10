@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 @lombok.Getter
 public class Box extends Entity{
 
-    private final String WALL = "Wall";
+    private static  final String WALL = "Wall";
     @Builder
     public Box(float x, float y, int maxHealth, float width, float height) {
         super(EntityType.BOX, 10, x, y, maxHealth, 0,width,height);
@@ -17,7 +17,7 @@ public class Box extends Entity{
     }
 
     public static Box fromString(String strBox) {
-        String regex = "(Wall) size=\\((\\d+),(\\d+)\\) position=\\((\\d+),(\\d+)\\)";
+        String regex = "(" + WALL + ") size=\\((\\d+),(\\d+)\\) position=\\((\\d+),(\\d+)\\)";
 
         // Compile the pattern
         Pattern pattern = Pattern.compile(regex);
@@ -41,5 +41,10 @@ public class Box extends Entity{
             System.out.println("No match found.");
             return null;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Wall size=(" + (int)width + "," + (int)height + ") position=(" + (int)x + "," + (int)y + ")";
     }
 }
