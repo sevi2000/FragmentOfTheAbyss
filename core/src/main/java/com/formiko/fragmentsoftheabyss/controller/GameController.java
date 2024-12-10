@@ -78,7 +78,6 @@ public class GameController extends InputAdapter {
     }
 
     public boolean checkCollision(){
-        System.out.println(items.size());
         for (Entity item : items) {
            if (player.collidesWith(item)) {
             return true;

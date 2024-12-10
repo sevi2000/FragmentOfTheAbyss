@@ -2,7 +2,6 @@ package com.formiko.fragmentsoftheabyss;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.formiko.fragmentsoftheabyss.controller.GameController;
 import com.formiko.fragmentsoftheabyss.model.entity.Box;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
@@ -14,18 +13,14 @@ import com.formiko.fragmentsoftheabyss.view.PlayerUIView;
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends ApplicationAdapter {
 
-    private SpriteBatch batch;
     private Player player;
     private GameView gameView;
     private GameController gameController;
     private BoxView boxView;
-    private Box box;
     private PlayerUIView playerUIView;
-
 
     @Override
     public void create() {
-        batch = new SpriteBatch();
 
         player = Player.builder()
                 .id(EntityType.PLAYER)
@@ -48,35 +43,27 @@ public class Main extends ApplicationAdapter {
 
         gameController = new GameController(player);
         Gdx.input.setInputProcessor(gameController);
-        boxView = new BoxView();
-        box = Box.builder()
+        Box box = Box.builder()
                 .x(100)
                 .y(100)
                 .maxHealth(100)
-                .width(100)
-                .height(100)
                 .build();
                 gameController.items.add(box);
+        boxView = new BoxView(box);
+
     }
 
     @Override
     public void render() {
         gameController.kayPress();
-        batch.begin();
-        gameView.render(batch, player);
-        batch.end();
-        boxView.render(box);
-        playerUIView.render(player);
-        boxView.render(box);
+        gameView.render(player);
+        boxView.render();
         playerUIView.render(player);
     }
 
     @Override
     public void dispose() {
-        batch.dispose();
         gameView.dispose();
-        boxView.dispose();
-        playerUIView.dispose();
         boxView.dispose();
         playerUIView.dispose();
     }
