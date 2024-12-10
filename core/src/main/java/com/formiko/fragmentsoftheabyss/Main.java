@@ -53,8 +53,8 @@ public class Main extends ApplicationAdapter {
                 gameController.items.add(box);
                 if (box.toString().equals("Wall size=(80,80) position=(5,10)")) {
                     System.out.println("Convertion works");
-                } else {    
-                    System.out.println("Convertion does not work"); 
+                } else {
+                    System.out.println("Convertion does not work");
                 }
                 System.out.println(box.toString());
     }
@@ -75,8 +75,6 @@ public class Main extends ApplicationAdapter {
     public void dispose() {
         batch.dispose();
         gameView.dispose();
-        boxView.dispose();
-        playerUIView.dispose();
         boxView.dispose();
         playerUIView.dispose();
     }
