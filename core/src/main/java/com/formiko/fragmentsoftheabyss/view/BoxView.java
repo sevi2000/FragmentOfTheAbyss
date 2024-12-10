@@ -1,22 +1,30 @@
 package com.formiko.fragmentsoftheabyss.view;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.formiko.fragmentsoftheabyss.model.entity.Box;
 
 public class BoxView {
 
-    private ShapeRenderer shapeRenderer;
-    public BoxView() {
-        this.shapeRenderer = new ShapeRenderer();
+    private final Texture texture;
+    private final Box box;
+    private final SpriteBatch batch;
+
+    public BoxView(Box box) {
+        this.texture = new Texture("textures/wall.jpg");
+        this.box = box;
+        this.batch = new SpriteBatch();
     }
     
-    public void render(Box box) {
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(1, 0, 0, 1);
-        shapeRenderer.rect(box.getX(), box.getY(), box.getWidth(), box.getHeight());
-        shapeRenderer.end();
+    public void render() {
+        batch.begin();
+        batch.draw(texture,  box.getX(), box.getY());
+        batch.end();
     }
     public void dispose(){
-        shapeRenderer.dispose();
+        texture.dispose();
+        batch.dispose();
     }
 }
