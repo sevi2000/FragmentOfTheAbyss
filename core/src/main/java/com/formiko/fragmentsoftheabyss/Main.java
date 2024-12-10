@@ -49,13 +49,7 @@ public class Main extends ApplicationAdapter {
         gameController = new GameController(player);
         Gdx.input.setInputProcessor(gameController);
         boxView = new BoxView();
-        box = Box.builder()
-                .x(100)
-                .y(100)
-                .maxHealth(100)
-                .width(100)
-                .height(100)
-                .build();
+        box = Box.fromString("Wall size=(80,80) position=(5,10)");
                 gameController.items.add(box);
     }
 
