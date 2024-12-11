@@ -1,0 +1,4 @@
+Wall size=(80,80) position=(5,10)
+Wall size=(80,80) position=(85,10)
+Wall size=(80,80) position=(165,10)
+Player size=(60,80) position=(12,8) health=100 mana=50

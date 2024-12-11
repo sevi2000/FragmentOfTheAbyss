@@ -22,6 +22,7 @@ public class BoxActor extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         // batch.draw(texture, getX()*getScaleX(), getY()*getScaleY(), getWidth()*getScaleX(), getHeight()*getScaleY());
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
+        System.out.println("Drawing box at: " + getX() + ", " + getY());
     }
     public void dispose(){
         texture.dispose();
