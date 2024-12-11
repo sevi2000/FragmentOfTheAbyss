@@ -1,23 +1,27 @@
 package com.formiko.fragmentsoftheabyss;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.formiko.fragmentsoftheabyss.controller.GameController;
 import com.formiko.fragmentsoftheabyss.model.entity.Box;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
+import com.formiko.fragmentsoftheabyss.view.BoxActor;
 import com.formiko.fragmentsoftheabyss.view.BoxView;
+import com.formiko.fragmentsoftheabyss.view.GameScreen;
 import com.formiko.fragmentsoftheabyss.view.GameView;
+import com.formiko.fragmentsoftheabyss.view.PlayerActor;
 import com.formiko.fragmentsoftheabyss.view.PlayerUIView;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
-public class Main extends ApplicationAdapter {
+public class Main extends Game {
 
     private Player player;
     private GameView gameView;
     private GameController gameController;
     private BoxView boxView;
     private PlayerUIView playerUIView;
+    private GameScreen gameScreen;
 
     @Override
     public void create() {
@@ -38,8 +42,8 @@ public class Main extends ApplicationAdapter {
                 .build();
 
         /* View */
-        playerUIView = new PlayerUIView();
-        gameView = new GameView();
+        // playerUIView = new PlayerUIView();
+        // gameView = new GameView();
 
         gameController = new GameController(player);
         Gdx.input.setInputProcessor(gameController);
@@ -49,16 +53,26 @@ public class Main extends ApplicationAdapter {
                 .maxHealth(100)
                 .build();
                 gameController.items.add(box);
-        boxView = new BoxView(box);
+        // boxView = new BoxView(box);
 
+        gameScreen = new GameScreen();
+        setScreen(gameScreen);
+
+        BoxActor boxActor = new BoxActor(box);
+        // boxActor.setSize(box.getWidth(), box.getHeight());
+        gameScreen.addActorToField(boxActor);
+        PlayerActor playerActor = new PlayerActor(player);
+        // playerActor.setSize(player.getWidth(), player.getHeight());
+        gameScreen.addActorToField(playerActor);
     }
 
     @Override
     public void render() {
         gameController.kayPress();
-        gameView.render(player);
-        boxView.render();
-        playerUIView.render(player);
+        super.render();
+        // gameView.render(player);
+        // boxView.render();
+        // playerUIView.render(player);
     }
 
     @Override
