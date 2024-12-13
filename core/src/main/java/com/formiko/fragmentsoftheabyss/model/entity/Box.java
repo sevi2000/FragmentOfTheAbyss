@@ -8,7 +8,9 @@ import lombok.Builder;
 
 @lombok.Getter
 public class Box extends Entity{
+
     private static final String WALL = "Wall";
+
     @Builder
     public Box(float x, float y, int maxHealth, float width, float height) {
         super(EntityType.BOX, 0, x, y, maxHealth, 0,width,height);
@@ -28,11 +30,11 @@ public class Box extends Entity{
             // Print the matched pattern
             System.out.println("Match found: " + matcher.group());
             Box box = Box.builder()
-                .x(Integer.parseInt(matcher.group(4)))
-                .y(Integer.parseInt(matcher.group(5)))
-                .maxHealth(100)
-                //.width(Integer.parseInt(matcher.group(2)))
-                //.height(Integer.parseInt(matcher.group(3)))
+                    .x(Integer.parseInt(matcher.group(4)))
+                    .y(Integer.parseInt(matcher.group(5)))
+                    .maxHealth(100)
+                    .width(Integer.parseInt(matcher.group(2)))
+                    .height(Integer.parseInt(matcher.group(3)))
                 .build();
             return box;
         } else {

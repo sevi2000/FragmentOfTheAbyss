@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.formiko.fragmentsoftheabyss.model.entity.Entity;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
+import com.formiko.fragmentsoftheabyss.view.FieldActor;
 
 public class GameController extends InputAdapter {
     private final Player player;
-    public ArrayList<Entity> items;
+    public FieldActor actor;
 
-    public GameController(Player player) {
+    public GameController(Player player, FieldActor actor) {
         this.player = player;
-        this.items = new ArrayList<>();
-       
+        this.actor = actor;
     }
 
     public void kayPress(){
@@ -69,7 +70,7 @@ public class GameController extends InputAdapter {
     }
 
     public boolean checkCollision(){
-        for (Entity item : items) {
+        for (Entity item : actor.getListEntityOnField()) {
            if (player.collidesWith(item)) {
             return true;
            }

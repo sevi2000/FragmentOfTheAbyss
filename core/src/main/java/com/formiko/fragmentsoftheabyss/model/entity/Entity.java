@@ -37,6 +37,7 @@ public abstract class Entity {
     }
 
     public boolean collidesWith(Entity entity) {
+        System.out.println("on survole");
         return this.getBounds().overlaps(entity.getBounds());
     }
 }

@@ -45,22 +45,23 @@ public class Main extends Game {
         // playerUIView = new PlayerUIView();
         // gameView = new GameView();
 
-        gameController = new GameController(player);
-        Gdx.input.setInputProcessor(gameController);
-        // Box box = Box.builder()
-        //         .x(100)
-        //         .y(100)
-        //         .maxHealth(100)
-        //         .build();
-        //         gameController.items.add(box);
-        // boxView = new BoxView(box);
 
+     /*    Box box = Box.builder()
+                 .x(100)
+                 .y(100)
+                 .maxHealth(100)
+                 .build();
+                 gameController.items.add(box);
+         boxView = new BoxView(box);
+*/
         gameScreen = new GameScreen();
         setScreen(gameScreen);
+        gameController = new GameController(player, gameScreen.getFieldActor());
+        Gdx.input.setInputProcessor(gameController);
 
-        // BoxActor boxActor = new BoxActor(box);
-        // boxActor.setSize(box.getWidth(), box.getHeight());
-        // gameScreen.addActorToField(boxActor);
+       /*  BoxActor boxActor = new BoxActor(box);
+         boxActor.setSize(box.getWidth(), box.getHeight());
+         gameScreen.addActorToField(boxActor);*/
         PlayerActor playerActor = new PlayerActor(player);
         // playerActor.setSize(player.getWidth(), player.getHeight());
         gameScreen.addActorToField(playerActor);
