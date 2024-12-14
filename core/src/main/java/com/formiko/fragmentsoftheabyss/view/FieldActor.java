@@ -8,18 +8,25 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.formiko.fragmentsoftheabyss.model.entity.Box;
+import com.formiko.fragmentsoftheabyss.model.entity.Player;
 import com.formiko.fragmentsoftheabyss.model.entity.Entity;
+import com.formiko.fragmentsoftheabyss.utils.Parser;
+import com.formiko.fragmentsoftheabyss.model.Field;
 import lombok.Getter;
 
 @Getter
 public class FieldActor extends Group {
     private final Texture mapTexture = new Texture("textures/texture.jpg");
-    private final ArrayList<Entity> listEntityOnField;
+    private final Field field;
+    
 
-    public FieldActor() {
-        this.listEntityOnField = new ArrayList<Entity>();
-        loadFromFile("levels/level1.txt");
+    public FieldActor(Field field) {
+        this.field = field;
+        //setBounds(0, 0, field, field.getHeight());
+        addActors();
     }
 
     /**
@@ -35,16 +42,18 @@ public class FieldActor extends Group {
         }
     }
 
-    public void loadFromFile(String path) {
-        FileHandle file = Gdx.files.internal(path);
-        String [] lines = file.readString().split("\n");
-        for (String line : lines) {
-            if (line.startsWith("Wall")) {
-                Box box = Box.fromString(line);
+    public void addActors() {
+        for (Entity entity : field.getListEntityOnField()) {
+            if (entity instanceof Box) {
+                Box box = (Box) entity;
                 BoxActor boxActor = new BoxActor(box);//TODO ajouter OPTIONAL
                 boxActor.setSize(box.getWidth(), box.getHeight());
                 addActor(boxActor);
-                listEntityOnField.add(box);
+            } else if (entity instanceof Player) {
+                Player player = (Player) entity;
+                PlayerActor playerActor = new PlayerActor(player);
+                playerActor.setSize(player.getWidth(), player.getHeight());
+                addActor(playerActor);
             }
         }
     }

@@ -1,13 +1,17 @@
 package com.formiko.fragmentsoftheabyss;
 
+import com.formiko.fragmentsoftheabyss.model.Field;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.formiko.fragmentsoftheabyss.controller.GameController;
 import com.formiko.fragmentsoftheabyss.model.entity.Box;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
+import com.formiko.fragmentsoftheabyss.utils.Parser;
 import com.formiko.fragmentsoftheabyss.view.BoxActor;
 import com.formiko.fragmentsoftheabyss.view.BoxView;
+import com.formiko.fragmentsoftheabyss.view.FieldActor;
 import com.formiko.fragmentsoftheabyss.view.GameScreen;
 import com.formiko.fragmentsoftheabyss.view.GameView;
 import com.formiko.fragmentsoftheabyss.view.PlayerActor;
@@ -25,46 +29,12 @@ public class Main extends Game {
 
     @Override
     public void create() {
-
-        player = Player.builder()
-                .id(EntityType.PLAYER)
-                .health(1000)
-                .maxHealth(1000)
-                .speed(1)
-                .x(0)
-                .y(0)
-                .width(60)
-                .height(80)
-                .attack(0)
-                .defense(0)
-                .gold(0)
-                .experience(0)
-                .build();
-
-        /* View */
-        // playerUIView = new PlayerUIView();
-        // gameView = new GameView();
-
-
-     /*    Box box = Box.builder()
-                 .x(100)
-                 .y(100)
-                 .maxHealth(100)
-                 .build();
-                 gameController.items.add(box);
-         boxView = new BoxView(box);
-*/
-        gameScreen = new GameScreen();
+        gameScreen = new GameScreen("levels/level2.json");
+        Field field = gameScreen.getFieldActor().getField();
+        player = field.getPlayer();
         setScreen(gameScreen);
         gameController = new GameController(player, gameScreen.getFieldActor());
-        Gdx.input.setInputProcessor(gameController);
-
-       /*  BoxActor boxActor = new BoxActor(box);
-         boxActor.setSize(box.getWidth(), box.getHeight());
-         gameScreen.addActorToField(boxActor);*/
-        PlayerActor playerActor = new PlayerActor(player);
-        // playerActor.setSize(player.getWidth(), player.getHeight());
-        gameScreen.addActorToField(playerActor);
+        Gdx.input.setInputProcessor(gameController);        
     }
 
     @Override
@@ -73,13 +43,12 @@ public class Main extends Game {
         super.render();
         // gameView.render(player);
         // boxView.render();
-        // playerUIView.render(player);
     }
 
     @Override
     public void dispose() {
-        gameView.dispose();
-        boxView.dispose();
-        playerUIView.dispose();
+        //gameView.dispose();
+        //boxView.dispose();
+        //playerUIView.dispose();
     }
 }

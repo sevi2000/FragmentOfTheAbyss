@@ -14,8 +14,9 @@ public class Box extends Entity{
     @Builder
     public Box(float x, float y, int maxHealth, float width, float height) {
         super(EntityType.BOX, 0, x, y, maxHealth, 0,width,height);
-    }
 
+    }
+    public Box(){super(EntityType.BOX,0,0,0,0,0,0,0);}
     public static Box fromString(String strBox) {
         String regex = "(" + WALL + ") size=\\((\\d+),(\\d+)\\) position=\\((\\d+),(\\d+)\\)";
 
@@ -46,5 +47,28 @@ public class Box extends Entity{
     @Override
     public String toString() {
         return "Wall size=(" + (int)width + "," + (int)height + ") position=(" + (int)x + "," + (int)y + ")";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Box box = (Box) o;
+
+        if (Float.compare(box.x, x) != 0) {
+            return false;
+        }
+        if (Float.compare(box.y, y) != 0) {
+            return false;
+        }
+        if (Float.compare(box.width, width) != 0) {
+            return false;
+        }
+        return Float.compare(box.height, height) == 0;
     }
 }

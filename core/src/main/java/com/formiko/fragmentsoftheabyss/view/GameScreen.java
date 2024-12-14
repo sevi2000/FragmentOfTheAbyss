@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import lombok.Getter;
 
+import com.formiko.fragmentsoftheabyss.model.Field;
 
 public class GameScreen implements Screen {
     private static Viewport viewport;
@@ -20,13 +21,13 @@ public class GameScreen implements Screen {
     @Getter
     private FieldActor fieldActor;
 
-    public GameScreen() {
+    public GameScreen(String path) {
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         // camera.setToOrtho(false, 1000, 1000);
         viewport = new FitViewport(1000, 1000, camera);
         stage = new Stage(viewport, batch);
-        fieldActor = new FieldActor();
+        fieldActor = new FieldActor(Field.fromFile(path));
         fieldActor.setSize(1000, 1000);
         fieldActor.setPosition(0, 0);
         addActor(fieldActor);

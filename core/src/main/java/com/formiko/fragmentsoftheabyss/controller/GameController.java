@@ -22,30 +22,30 @@ public class GameController extends InputAdapter {
         
         if (Gdx.input.isKeyPressed(Input.Keys.W) ||
                 Gdx.input.isKeyPressed(Input.Keys.UP)) {
-                    player.move(0, player.getSpeed());
+                    player.move(0, 1);
                     if (checkCollision()) {
-                        player.move(0, - player.getSpeed());
+                        player.move(0, - 1);
                     }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S) ||
                 Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-                    player.move(0, -player.getSpeed());
+                    player.move(0, -1);
                     if (checkCollision()) {
-                        player.move(0, player.getSpeed());
+                        player.move(0, 1);
                     }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.Q) ||
                 Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-                    player.move(-player.getSpeed(), 0);
+                    player.move(-1, 0);
                     if (checkCollision()) {
-                        player.move(player.getSpeed(), 0);
+                        player.move(1, 0);
                     }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D) ||
                 Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                    player.move(player.getSpeed(), 0);
+                    player.move(1, 0);
                     if (checkCollision()) {
-                        player.move(-player.getSpeed(), 0);
+                        player.move(-1, 0);
                     }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
@@ -70,8 +70,8 @@ public class GameController extends InputAdapter {
     }
 
     public boolean checkCollision(){
-        for (Entity item : actor.getListEntityOnField()) {
-           if (player.collidesWith(item)) {
+        for (Entity item : actor.getField().getListEntityOnField()) {  
+           if (player != item && player.collidesWith(item)) {
             return true;
            }
         }
