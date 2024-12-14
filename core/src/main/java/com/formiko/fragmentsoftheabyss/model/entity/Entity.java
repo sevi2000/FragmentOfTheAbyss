@@ -16,7 +16,8 @@ import lombok.Setter;
 )
 @JsonSubTypes({
     @JsonSubTypes.Type(value = Box.class, name = "BOX"),
-    @JsonSubTypes.Type(value = Player.class, name = "PLAYER")
+    @JsonSubTypes.Type(value = Player.class, name = "PLAYER"),
+    @JsonSubTypes.Type(value = Monster.class, name = "MONSTER")
 })
 @AllArgsConstructor
 @Getter

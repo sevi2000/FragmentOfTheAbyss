@@ -7,6 +7,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.formiko.fragmentsoftheabyss.model.entity.Entity;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
+import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 import com.formiko.fragmentsoftheabyss.view.FieldActor;
 
 public class GameController extends InputAdapter {
@@ -68,6 +69,36 @@ public class GameController extends InputAdapter {
         player.setX(screenX);
         player.setY(screenY);
         return super.touchDown(screenX, screenY, pointer, button);
+    }
+
+    public void animatMonster(){
+        for (Entity item : actor.getField().getListEntityOnField()) {
+            if (item.getId() == EntityType.MONSTER) {
+                System.out.println("Monster move");
+                float deltaX = player.getX() - item.getX();
+                float deltaY = player.getY() - item.getY();
+                if (!checkCollision()) {
+                    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                        if (deltaX > 0) {
+                            item.move(1, 0);
+                        } else {
+                            item.move(-1, 0);
+                        }
+                    } else {
+                        if (deltaY > 0) {
+                            item.move(0, 1);
+                        } else {
+                            item.move(0, -1);
+                        }
+                    }  
+                }
+                
+                /*if (checkCollision()) {
+                    item.move(-1, 0);
+                }
+                item.move(1, 0);*/
+            }
+        }
     }
 
     public boolean checkCollision(){

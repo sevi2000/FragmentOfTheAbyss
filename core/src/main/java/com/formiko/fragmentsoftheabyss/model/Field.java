@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.formiko.fragmentsoftheabyss.model.entity.Box;
 
 import com.formiko.fragmentsoftheabyss.model.entity.Entity;
+import com.formiko.fragmentsoftheabyss.model.entity.Monster;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
 import com.formiko.fragmentsoftheabyss.utils.Parser;
 
@@ -35,6 +36,8 @@ public class Field {
       .width(50)
       .height(50)
       .build();
+      Monster monster = Monster.builder().x(200).y(200).width(50).height(50).build();
+      listEntityOnField.add(monster);
    }
         
          public String toJson() {

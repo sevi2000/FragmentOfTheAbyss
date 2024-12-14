@@ -52,31 +52,4 @@ public class Player extends Entity{
         else this.health = maxHealth;
     }
 
-    /*public static Player fromString(String line) {
-
-        String regex = "(" + PLAYER + ") size=\\((\\d+),(\\d+)\\) position=\\((\\d+),(\\d+)\\)";
-
-        // Compile the pattern Pattern pattern = Pattern.compile(regex);
-
-        // Match the pattern in the input string
-        Matcher matcher = pattern.matcher(strBox);
-
-        // Check if a match is found
-        if (matcher.find()) {
-            // Print the matched pattern
-            System.out.println("Match found: " + matcher.group());
-            Player player = Player.builder()
-                .x(Integer.parseInt(matcher.group(4)))
-                .y(Integer.parseInt(matcher.group(5)))
-                .maxHealth(100)
-                .width(Integer.parseInt(matcher.group(2)))
-                .height(Integer.parseInt(matcher.group(3)))
-                .build();
-            return player;
-        } else {
-            System.out.println("No match found.");
-            return null;
-        }
-
-    }*/
 }

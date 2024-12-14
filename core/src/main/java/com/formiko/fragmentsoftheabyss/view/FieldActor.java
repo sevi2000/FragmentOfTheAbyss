@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.formiko.fragmentsoftheabyss.model.entity.Box;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
 import com.formiko.fragmentsoftheabyss.model.entity.Entity;
+import com.formiko.fragmentsoftheabyss.model.entity.Monster;
 import com.formiko.fragmentsoftheabyss.utils.Parser;
 import com.formiko.fragmentsoftheabyss.model.Field;
 import lombok.Getter;
@@ -54,6 +55,12 @@ public class FieldActor extends Group {
                 PlayerActor playerActor = new PlayerActor(player);
                 playerActor.setSize(player.getWidth(), player.getHeight());
                 addActor(playerActor);
+            } else if (entity instanceof Monster) {
+                Monster monster = (Monster) entity;
+                MonsterActor monsterActor = new MonsterActor(monster);
+                monsterActor.setSize(monster.getWidth(), monster.getHeight());
+                addActor(monsterActor);
+                
             }
         }
     }

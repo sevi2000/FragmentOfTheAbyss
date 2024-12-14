@@ -35,11 +35,13 @@ public class Main extends Game {
         setScreen(gameScreen);
         gameController = new GameController(player, gameScreen.getFieldActor());
         Gdx.input.setInputProcessor(gameController);        
+        System.out.println(field.getListEntityOnField().stream().filter(e -> e.getId() == EntityType.MONSTER).toList().size());
     }
 
     @Override
     public void render() {
         gameController.kayPress();
+        gameController.animatMonster();
         super.render();
         // gameView.render(player);
         // boxView.render();
