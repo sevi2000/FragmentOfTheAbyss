@@ -29,8 +29,8 @@ public class PlayerActor extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(playerTexture, getX(), getY(), getWidth(), getHeight());
-        // batch.draw(playerTexture, getX()*getScaleX(), getY()*getScaleY(), getWidth()*getScaleX(), getHeight()*getScaleY());
+        //batch.draw(playerTexture, getX(), getY(), getWidth(), getHeight());
+        batch.draw(playerTexture, getX()*getScaleX(), getY()*getScaleY(), getWidth()*getScaleX(), getHeight()*getScaleY());
 
         float healPercentage = (float) player.getHealth() / player.getMaxHealth();
 

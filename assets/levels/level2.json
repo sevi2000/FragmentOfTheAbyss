@@ -1,0 +1,55 @@
+{
+    "player": {
+        "type": "PLAYER",
+        "id": null,
+        "health": 0,
+        "x": 300.0,
+        "y": 300.0,
+        "maxHealth": 100,
+        "speed": 10,
+        "width": 60.0,
+        "height": 80.0,
+        "name": null,
+        "experience": 0,
+        "gold": 0,
+        "attack": 0,
+        "defense": 0
+    },
+    "width": 0,
+    "height": 0,
+    "listEntityOnField": [
+        {
+            "type": "BOX",
+            "id": "BOX",
+            "health": 0,
+            "x": 100.0,
+            "y": 100.0,
+            "maxHealth": 100,
+            "speed": 0,
+            "width": 50.0,
+            "height": 50.0
+        },
+        {
+            "type": "BOX",
+            "id": "BOX",
+            "health": 0,
+            "x": 100.0,
+            "y": 150.0,
+            "maxHealth": 100,
+            "speed": 0,
+            "width": 50.0,
+            "height": 50.0
+        },
+        {
+            "type": "BOX",
+            "id": "BOX",
+            "health": 0,
+            "x": 100.0,
+            "y": 200.0,
+            "maxHealth": 100,
+            "speed": 0,
+            "width": 50.0,
+            "height": 50.0
+        }
+    ]
+}
