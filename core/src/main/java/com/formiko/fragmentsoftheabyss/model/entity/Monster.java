@@ -19,4 +19,12 @@ public class Monster extends Entity {
     public Monster() {
         super(EntityType.MONSTER, 0, 0, 0, 0, 0, 0, 0);
     }
+
+    public void damage(int attack2) {
+            if (this.health > attack2) {
+                this.health -= attack2;
+            } else {
+                this.health = 0;
+            }
+    }
 }

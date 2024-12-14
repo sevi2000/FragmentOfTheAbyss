@@ -58,7 +58,13 @@ public class GameController extends InputAdapter {
             player.revive(100);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            player.damage(20);
+            int radius = 100;
+            Monster monster = actor.getField().getListEntityOnField().stream().filter(e -> e.getId() == EntityType.MONSTER)
+                    .map(e -> (Monster) e).filter(e -> e.getX() < player.getX() + radius && e.getX() > player.getX() - radius)
+                    .filter(e -> e.getY() < player.getY() + radius && e.getY() > player.getY() - radius).findFirst().orElse(null);
+            if (monster != null) {
+                monster.damage(player.getAttack());
+            }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
             player.revive(100);
