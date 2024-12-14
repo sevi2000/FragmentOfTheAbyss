@@ -14,7 +14,7 @@ public class GameController extends InputAdapter {
     public GameController(Player player) {
         this.player = player;
         this.items = new ArrayList<>();
-       
+        MusicController.playMainMusic();
     }
 
     public void kayPress(){
