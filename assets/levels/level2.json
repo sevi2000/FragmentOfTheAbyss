@@ -61,7 +61,7 @@
             "speed": 1,
             "width": 60.0,
             "height": 80.0,
-            "attack": 0
+            "attack": 10        
         }
     ]
 }

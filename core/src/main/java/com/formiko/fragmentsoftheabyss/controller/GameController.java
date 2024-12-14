@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.formiko.fragmentsoftheabyss.model.entity.Entity;
+import com.formiko.fragmentsoftheabyss.model.entity.Monster;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 import com.formiko.fragmentsoftheabyss.view.FieldActor;
@@ -91,6 +92,8 @@ public class GameController extends InputAdapter {
                             item.move(0, -1);
                         }
                     }  
+                } else{
+                    player.damage(((Monster)item).getAttack());
                 }
                 
                 /*if (checkCollision()) {
