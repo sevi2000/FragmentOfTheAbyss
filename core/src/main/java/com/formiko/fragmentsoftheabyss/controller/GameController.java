@@ -1,6 +1,9 @@
 package com.formiko.fragmentsoftheabyss.controller;
 
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
@@ -21,35 +24,35 @@ public class GameController extends InputAdapter {
         MusicController.playMainMusic();
     }
 
-    public void kayPress(){
-        
+    public void kayPress() {
+
         if (Gdx.input.isKeyPressed(Input.Keys.W) ||
                 Gdx.input.isKeyPressed(Input.Keys.UP)) {
-                    player.move(0, 1);
-                    if (checkCollision()) {
-                        player.move(0, - 1);
-                    }
+            player.move(0, 1);
+            if (checkCollision(player).isPresent()) {
+                player.move(0, -1);
+            }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S) ||
                 Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-                    player.move(0, -1);
-                    if (checkCollision()) {
-                        player.move(0, 1);
-                    }
+            player.move(0, -1);
+            if (checkCollision(player).isPresent()) {
+                player.move(0, 1);
+            }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.Q) ||
                 Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-                    player.move(-1, 0);
-                    if (checkCollision()) {
-                        player.move(1, 0);
-                    }
+            player.move(-1, 0);
+            if (checkCollision(player).isPresent()) {
+                player.move(1, 0);
+            }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D) ||
                 Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                    player.move(1, 0);
-                    if (checkCollision()) {
-                        player.move(-1, 0);
-                    }
+            player.move(1, 0);
+            if (checkCollision(player).isPresent()) {
+                player.move(-1, 0);
+            }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
             player.damage(20);
@@ -59,9 +62,12 @@ public class GameController extends InputAdapter {
         }
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
             int radius = 100;
-            Monster monster = actor.getField().getListEntityOnField().stream().filter(e -> e.getId() == EntityType.MONSTER)
-                    .map(e -> (Monster) e).filter(e -> e.getX() < player.getX() + radius && e.getX() > player.getX() - radius)
-                    .filter(e -> e.getY() < player.getY() + radius && e.getY() > player.getY() - radius).findFirst().orElse(null);
+            Monster monster = actor.getField().getListEntityOnField().stream()
+                    .filter(e -> e.getId() == EntityType.MONSTER)
+                    .map(e -> (Monster) e)
+                    .filter(e -> e.getX() < player.getX() + radius && e.getX() > player.getX() - radius)
+                    .filter(e -> e.getY() < player.getY() + radius && e.getY() > player.getY() - radius).findFirst()
+                    .orElse(null);
             if (monster != null) {
                 monster.damage(player.getAttack());
             }
@@ -78,44 +84,56 @@ public class GameController extends InputAdapter {
         return super.touchDown(screenX, screenY, pointer, button);
     }
 
-    public void animatMonster(){
-        for (Entity item : actor.getField().getListEntityOnField()) {
-            if (item.getId() == EntityType.MONSTER) {
-                System.out.println("Monster move");
-                float deltaX = player.getX() - item.getX();
-                float deltaY = player.getY() - item.getY();
-                if (!checkCollision()) {
-                    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                        if (deltaX > 0) {
-                            item.move(1, 0);
-                        } else {
-                            item.move(-1, 0);
-                        }
-                    } else {
-                        if (deltaY > 0) {
-                            item.move(0, 1);
-                        } else {
-                            item.move(0, -1);
-                        }
-                    }  
-                } else{
-                    player.damage(((Monster)item).getAttack());
-                }
-                
-                /*if (checkCollision()) {
-                    item.move(-1, 0);
-                }
-                item.move(1, 0);*/
+    private void moveToPosition(Entity item, float deltaX, float deltaY) {
+
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            if (deltaX > 0) {
+                item.move(1, 0);
+            } else {
+                item.move(-1, 0);
+            }
+        } else {
+            if (deltaY > 0) {
+                item.move(0, 1);
+            } else {
+                item.move(0, -1);
             }
         }
     }
 
-    public boolean checkCollision(){
-        for (Entity item : actor.getField().getListEntityOnField()) {  
-           if (player != item && player.collidesWith(item)) {
-            return true;
-           }
+    public void animatMonster() {
+        for (Entity monster : actor.getField().getListEntityOnField()) {
+            if (monster.getId() == EntityType.MONSTER) {
+                System.out.println("Monster move");
+                Optional<Entity> entity = checkCollision(monster);
+                float deltaX = player.getX() - monster.getX();
+                float deltaY = player.getY() - monster.getY();
+                if (entity.isPresent() && entity.get().getId() == EntityType.BOX) {
+                    deltaX = new Random().nextInt(/*actor.getField().getWidth()*/1000) - monster.getX();
+                    deltaY = new Random().nextInt(1000)+ 500 - monster.getY();
+                    moveToPosition(monster, deltaX, deltaY);
+                } else if (entity.isPresent() && entity.get().getId() == EntityType.PLAYER) {
+                    player.damage(((Monster) monster).getAttack());
+                } else {
+                    moveToPosition(monster, deltaX, deltaY);
+                }
+
+                /*
+                 * if (checkCollision()) {
+                 * item.move(-1, 0);
+                 * }
+                 * item.move(1, 0);
+                 */
+            }
         }
-        return false;
+    }
+
+    public Optional<Entity> checkCollision(Entity current) {
+        for (Entity item : actor.getField().getListEntityOnField()) {
+            if (current != item && current.collidesWith(item)) {
+                return Optional.of(item);
+            }
+        }
+        return Optional.empty();
     }
 }

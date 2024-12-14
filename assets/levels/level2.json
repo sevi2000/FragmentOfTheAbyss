@@ -1,7 +1,7 @@
 {
     "player": {
         "type": "PLAYER",
-        "id": null,
+        "id": "PLAYER",
         "health": 100,
         "x": 300.0,
         "y": 300.0,
