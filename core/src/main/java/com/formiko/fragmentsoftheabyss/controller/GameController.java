@@ -76,6 +76,10 @@ public class GameController extends InputAdapter {
                 if (monsterActor != null) {
                     actor.getField().removeEntity(monster);
                     actor.removeActor(monsterActor);
+                    if (!actor.getField().isThereMonster()) {
+                        actor.getField().openDoor();
+                        actor.addDoor(actor.getField().getDoor());
+                    }
                 }
             }
         }

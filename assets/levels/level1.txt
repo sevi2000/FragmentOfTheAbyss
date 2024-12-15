@@ -1,4 +1,0 @@
-Wall size=(50,50) position=(300,50)
-Wall size=(50,50) position=(85,10)
-Wall size=(50,50) position=(165,10)
-Player size=(60,80) position=(12,8) health=100 mana=50

@@ -17,8 +17,10 @@ public class Main extends Game {
 
     @Override
     public void create() {
-        gameScreen = new GameScreen("levels/level2.json");
+        gameScreen = new GameScreen("levels/level1.json");
         Field field = gameScreen.getFieldActor().getField();
+        Field field2 = new Field();
+        System.out.println(field2.toJson());
         player = field.getPlayer();
         setScreen(gameScreen);
         gameController = new GameController(player, gameScreen.getFieldActor());
