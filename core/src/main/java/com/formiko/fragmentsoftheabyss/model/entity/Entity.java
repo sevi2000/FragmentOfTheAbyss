@@ -1,10 +1,13 @@
 package com.formiko.fragmentsoftheabyss.model.entity;
 
+import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.formiko.fragmentsoftheabyss.model.Coordinates;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
+import com.formiko.fragmentsoftheabyss.utils.AStar;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +34,19 @@ public abstract class Entity {
     protected int speed;
     protected float width;
     protected float height;
+    protected List<Coordinates> path;
+
+    public Entity(EntityType id, int health, float x, float y, int maxHealth, int speed, float width, float height) {
+        this.id = id;
+        this.health = health;
+        this.x = x;
+        this.y = y;
+        this.maxHealth = maxHealth;
+        this.speed = speed;
+        this.width = width;
+        this.height = height;
+        this.path = List.of();
+    }
 
     public void move(float deltaX, float deltaY) {
         // Do not move more on higher FPS
@@ -53,6 +69,32 @@ public abstract class Entity {
         moveInsideScreenIfNeeded();
         // System.out.println("Move of " + deltaX + " " + deltaY + " " + speed + " in "+ Gdx.graphics.getWidth() + " " + Gdx.graphics.getHeight());
         Gdx.app.log("Entity", "Move of " + deltaX + " " + deltaY + " " + speed + " in "+ Gdx.graphics.getWidth() + " " + Gdx.graphics.getHeight());
+    }
+
+    public void moveToTarget(Entity target) {
+        if (path.isEmpty()) {
+            path = AStar.findPath(this, target);
+        }
+        if (!path.isEmpty()) {
+            Coordinates next = path.get(0);
+            moveTo(next);
+            //  every second clear the path to recalculate it
+            if (Gdx.graphics.getFrameId() % 60 == 0) {
+                path = List.of();
+            }
+        }
+    }
+
+    public void moveTo(Coordinates next) {
+        float deltaX = next.x() - this.x;
+        float deltaY = next.y() - this.y;
+        if (Math.abs(deltaX) < 1 && Math.abs(deltaY) < 1) {
+            this.x = next.x();
+            this.y = next.y();
+            path.remove(0);
+        } else {
+            move(deltaX, deltaY);
+        }
     }
 
     public Rectangle getBounds() {
@@ -85,6 +127,13 @@ public abstract class Entity {
     public void setY(float y) {
         this.y = y;
         moveInsideScreenIfNeeded();
+    }
+
+    public float getCenterX() {
+        return x + width / 2;
+    }
+    public float getCenterY() {
+        return y + height / 2;
     }
 
 }

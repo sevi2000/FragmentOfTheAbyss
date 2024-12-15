@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Align;
 import com.formiko.fragmentsoftheabyss.model.entity.Monster;
-import com.formiko.fragmentsoftheabyss.model.entity.Player;
 
 public class MonsterActor extends Actor {
     private final Texture monsterTexture;
@@ -55,6 +54,12 @@ public class MonsterActor extends Actor {
         // Debugging hitbox
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.rect(getX()*getScaleX(), getY()*getScaleY(), getWidth()*getScaleX(), getHeight()*getScaleY());
+        shapeRenderer.end();
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Point);
+        shapeRenderer.setColor(Color.BLUE);
+        for (int i = 0; i < monster.getPath().size(); i++) {
+            shapeRenderer.point(monster.getPath().get(i).x(), monster.getPath().get(i).y(), 0);
+        }
         shapeRenderer.end();
         batch.begin();
     }

@@ -1,7 +1,6 @@
 package com.formiko.fragmentsoftheabyss.controller;
 
 import java.util.Optional;
-import java.util.Random;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
@@ -14,6 +13,7 @@ import com.formiko.fragmentsoftheabyss.view.FieldActor;
 public class GameController extends InputAdapter {
     private final Player player;
     public FieldActor actor;
+    public int FIELD_SIZE = 1000;
 
     public GameController(Player player, FieldActor actor) {
         this.player = player;
@@ -102,26 +102,27 @@ public class GameController extends InputAdapter {
     public void animatMonster() {
         for (Entity monster : actor.getField().getListEntityOnField()) {
             if (monster.getId() == EntityType.MONSTER) {
-                // System.out.println("Monster move");
-                Optional<Entity> entity = checkCollision(monster);
-                float deltaX = player.getX() - monster.getX();
-                float deltaY = player.getY() - monster.getY();
-                if (entity.isPresent() && entity.get().getId() == EntityType.BOX) {
-                    deltaX = new Random().nextInt(/*actor.getField().getWidth()*/1000) - monster.getX();
-                    deltaY = new Random().nextInt(1000)+ 500 - monster.getY();
-                    moveToPosition(monster, deltaX, deltaY);
-                } else if (entity.isPresent() && entity.get().getId() == EntityType.PLAYER) {
-                    player.damage(((Monster) monster).getAttack());
-                } else {
-                    moveToPosition(monster, deltaX, deltaY);
-                }
+                // // System.out.println("Monster move");
+                // Optional<Entity> entity = checkCollision(monster);
+                // float deltaX = player.getX() - monster.getX();
+                // float deltaY = player.getY() - monster.getY();
+                // if (entity.isPresent() && entity.get().getId() == EntityType.BOX) {
+                //     deltaX = new Random().nextInt(/*actor.getField().getWidth()*/FIELD_SIZE) - monster.getX();
+                //     deltaY = new Random().nextInt(FIELD_SIZE)+ 500 - monster.getY();
+                //     moveToPosition(monster, deltaX, deltaY);
+                // } else if (entity.isPresent() && entity.get().getId() == EntityType.PLAYER) {
+                //     player.damage(((Monster) monster).getAttack());
+                // } else {
+                //     moveToPosition(monster, deltaX, deltaY);
+                // }
 
-                /*
-                 * if (checkCollision()) {
-                 * item.move(-1, 0);
-                 * }
-                 * item.move(1, 0);
-                 */
+                // /*
+                //  * if (checkCollision()) {
+                //  * item.move(-1, 0);
+                //  * }
+                //  * item.move(1, 0);
+                //  */
+                monster.moveToTarget(player);
             }
         }
     }
@@ -133,5 +134,14 @@ public class GameController extends InputAdapter {
             }
         }
         return Optional.empty();
+    }
+    public boolean isColliding(Entity current) {
+        return checkCollision(current).isPresent();
+    }
+    public boolean canMoveThere(Entity current) {
+        if(isColliding(current)){
+            return false;
+        }
+        return current.getX() >= 0 && current.getY() >= 0 && current.getWidth() < FIELD_SIZE && current.getHeight() < FIELD_SIZE;
     }
 }

@@ -1,31 +1,19 @@
 package com.formiko.fragmentsoftheabyss;
 
-import com.formiko.fragmentsoftheabyss.model.Field;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.formiko.fragmentsoftheabyss.controller.GameController;
-import com.formiko.fragmentsoftheabyss.model.entity.Box;
+import com.formiko.fragmentsoftheabyss.model.Field;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
-import com.formiko.fragmentsoftheabyss.utils.Parser;
-import com.formiko.fragmentsoftheabyss.view.BoxActor;
-import com.formiko.fragmentsoftheabyss.view.BoxView;
-import com.formiko.fragmentsoftheabyss.view.FieldActor;
 import com.formiko.fragmentsoftheabyss.view.GameScreen;
-import com.formiko.fragmentsoftheabyss.view.GameView;
-import com.formiko.fragmentsoftheabyss.view.PlayerActor;
-import com.formiko.fragmentsoftheabyss.view.PlayerUIView;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends Game {
 
     private Player player;
-    private GameView gameView;
     private GameController gameController;
-    private BoxView boxView;
-    private PlayerUIView playerUIView;
-    private GameScreen gameScreen;
+    private static GameScreen gameScreen;
 
     @Override
     public void create() {
@@ -52,5 +40,12 @@ public class Main extends Game {
         //gameView.dispose();
         //boxView.dispose();
         //playerUIView.dispose();
+    }
+
+    public static GameScreen getGameScreen() {
+        return gameScreen;
+    }
+    public static Field getField() {
+        return gameScreen.getFieldActor().getField();
     }
 }
