@@ -63,4 +63,8 @@ public class MonsterActor extends Actor {
         shapeRenderer.end();
         batch.begin();
     }
+
+    public Object getMonster() {
+        return this.monster;
+    }
 }

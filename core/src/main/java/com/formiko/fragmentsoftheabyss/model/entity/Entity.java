@@ -69,7 +69,7 @@ public abstract class Entity {
             Coordinates next = path.get(0);
             moveTo(next);
             //  every second clear the path to recalculate it
-            if (Gdx.graphics.getFrameId() % Gdx.graphics.getFramesPerSecond() == 0) {
+            if (Gdx.graphics.getFrameId() % Gdx.graphics.getDeltaTime() == 0) {
                 path = List.of();
             }
         }

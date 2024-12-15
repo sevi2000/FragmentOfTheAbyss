@@ -71,5 +71,8 @@ public class Field {
    public List<Entity> getMonsterEntity() {
       return listEntityOnField.stream().filter(e -> e.getId() == EntityType.MONSTER).toList();
    }
-   
+
+public void removeEntity(Entity entity) {
+   listEntityOnField.remove(entity);
+}
 }
