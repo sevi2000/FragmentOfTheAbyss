@@ -20,7 +20,7 @@ public class GameScreen implements Screen {
     @Getter
     private FieldActor fieldActor;
 
-    public GameScreen(String path) {
+    public GameScreen(int level) {
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         // Make the camera zoom *2 over the level
@@ -28,7 +28,7 @@ public class GameScreen implements Screen {
         camera.zoom = 0.5f * (1080f / Gdx.graphics.getHeight());
         viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         stage = new Stage(viewport, batch);
-        fieldActor = new FieldActor(Field.fromFile(path));
+        fieldActor = new FieldActor(Field.fromFile("levels/level" + level + ".json"));
         fieldActor.setSize(1000, 1000);
         fieldActor.setPosition(0, 0);
         addActor(fieldActor);

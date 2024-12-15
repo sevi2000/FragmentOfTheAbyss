@@ -1,5 +1,7 @@
 package com.formiko.fragmentsoftheabyss;
 
+import java.util.Optional;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.formiko.fragmentsoftheabyss.controller.GameController;
@@ -11,13 +13,14 @@ import com.formiko.fragmentsoftheabyss.view.GameScreen;
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends Game {
 
-    private Player player;
+    private Player player = null;
     private GameController gameController;
     private static GameScreen gameScreen;
+    private int level = 1;
 
     @Override
     public void create() {
-        gameScreen = new GameScreen("levels/level1.json");
+        gameScreen = new GameScreen(level);
         Field field = gameScreen.getFieldActor().getField();
         Field field2 = new Field();
         System.out.println(field2.toJson());
@@ -30,9 +33,17 @@ public class Main extends Game {
 
     @Override
     public void render() {
-        gameController.kayPress();
+        Optional<Boolean> nextLevel = gameController.kayPress();
         gameController.animatMonster();
+        if (nextLevel.isPresent()) {
+            level++;
+            if(level > 4) {
+                System.out.println("You win");
+            } else {
+                create();
+            }
         super.render();
+        }
         // gameView.render(player);
         // boxView.render();
     }

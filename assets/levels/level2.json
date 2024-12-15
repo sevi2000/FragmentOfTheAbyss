@@ -63,6 +63,17 @@
             "width": 60.0,
             "height": 80.0,
             "attack": 3
+        },
+        {
+            "type":"DOOR",
+            "id":"DOOR",
+            "health":0,
+            "x":200.0,
+            "y":200.0,
+            "maxHealth":0,
+            "speed":0,
+            "width":100.0,
+            "height":100.0
         }
     ]
 }

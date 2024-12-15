@@ -6,11 +6,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.formiko.fragmentsoftheabyss.Main;
+import com.formiko.fragmentsoftheabyss.model.entity.Door;
 import com.formiko.fragmentsoftheabyss.model.entity.Entity;
 import com.formiko.fragmentsoftheabyss.model.entity.Monster;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 import com.formiko.fragmentsoftheabyss.view.FieldActor;
+import com.formiko.fragmentsoftheabyss.view.GameScreen;
 import com.formiko.fragmentsoftheabyss.view.MonsterActor;
 
 public class GameController extends InputAdapter {
@@ -24,9 +27,7 @@ public class GameController extends InputAdapter {
         MusicController.playMainMusic();
     }
 
-    public void kayPress() {
-
-
+    public Optional<Boolean> kayPress() {
         if (Gdx.input.isKeyPressed(Input.Keys.W) ||
                 Gdx.input.isKeyPressed(Input.Keys.UP)) {
             player.move(0, 1);
@@ -87,6 +88,10 @@ public class GameController extends InputAdapter {
     if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
             player.revive(100);
         }
+        if (checkCollisionWithDoor(player).isPresent()) {
+            return Optional.of(true);
+        }
+        return Optional.empty();
     }
 
     @Override
@@ -136,6 +141,15 @@ public class GameController extends InputAdapter {
         for (Entity item : actor.getField().getBoxEntity()) {
             if (current != item && current.collidesWith(item)) {
                 return Optional.of(item);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public Optional <Door> checkCollisionWithDoor(Entity current) {
+        for (Entity item : actor.getField().getListEntityOnField()) {
+            if (item instanceof Door && current.collidesWith(item)) {
+                return Optional.of((Door) item);
             }
         }
         return Optional.empty();
