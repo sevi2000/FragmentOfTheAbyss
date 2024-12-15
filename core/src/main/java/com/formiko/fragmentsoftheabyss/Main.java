@@ -1,7 +1,6 @@
 package com.formiko.fragmentsoftheabyss;
 
 import java.util.Optional;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.formiko.fragmentsoftheabyss.controller.GameController;
@@ -42,8 +41,8 @@ public class Main extends Game {
             } else {
                 create();
             }
-        super.render();
         }
+        super.render(); 
         // gameView.render(player);
         // boxView.render();
     }
