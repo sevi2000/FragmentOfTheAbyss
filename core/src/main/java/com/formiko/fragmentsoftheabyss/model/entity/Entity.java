@@ -33,16 +33,26 @@ public abstract class Entity {
     protected float height;
 
     public void move(float deltaX, float deltaY) {
-        if ((this.x + deltaX * speed > Gdx.graphics.getWidth() - 80 || this.x + deltaX * speed < 0)) {
-            deltaX = 0;
-        }
-        if (this.y + deltaY * speed > Gdx.graphics.getHeight() - 80|| this.y + deltaY * speed < 0) {
-            deltaY = 0;
-        }
-        System.out.println("x: " + this.x + " y: " + this.y);
+        // Do not move more on higher FPS
+        float delta = Gdx.graphics.getDeltaTime();
+        deltaX *= delta*60;
+        deltaY *= delta*60;
+
+        // // Do not move out of the screen
+        // if ((this.x + deltaX * speed > Gdx.graphics.getWidth() - getWidth() || this.x + deltaX * speed < 0)) {
+        //     deltaX = 0;
+        // }
+        // if (this.y + deltaY * speed > Gdx.graphics.getHeight() - getWidth()|| this.y + deltaY * speed < 0) {
+        //     deltaY = 0;
+        // }
+        // System.out.println("x: " + this.x + " y: " + this.y);
         this.x += deltaX * speed;
         this.y += deltaY * speed;
-        System.out.println("x1: " + this.x + " y1: " + this.y);
+        // System.out.println("x1: " + this.x + " y1: " + this.y);
+
+        moveInsideScreenIfNeeded();
+        // System.out.println("Move of " + deltaX + " " + deltaY + " " + speed + " in "+ Gdx.graphics.getWidth() + " " + Gdx.graphics.getHeight());
+        Gdx.app.log("Entity", "Move of " + deltaX + " " + deltaY + " " + speed + " in "+ Gdx.graphics.getWidth() + " " + Gdx.graphics.getHeight());
     }
 
     public Rectangle getBounds() {
@@ -52,4 +62,29 @@ public abstract class Entity {
     public boolean collidesWith(Entity entity) {
         return this.getBounds().overlaps(entity.getBounds());
     }
+
+    public void moveInsideScreenIfNeeded(){
+        if (this.x < 0) {
+            this.x = 0;
+        }
+        if (this.x > Gdx.graphics.getWidth() - this.width) {
+            this.x = Gdx.graphics.getWidth() - this.width;
+        }
+        if (this.y < 0) {
+            this.y = 0;
+        }
+        if (this.y > Gdx.graphics.getHeight() - this.height) {
+            this.y = Gdx.graphics.getHeight() - this.height;
+        }
+    }
+
+    public void setX(float x) {
+        this.x = x;
+        moveInsideScreenIfNeeded();
+    }
+    public void setY(float y) {
+        this.y = y;
+        moveInsideScreenIfNeeded();
+    }
+
 }

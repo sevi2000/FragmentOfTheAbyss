@@ -1,13 +1,10 @@
 package com.formiko.fragmentsoftheabyss.controller;
 
-import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.formiko.fragmentsoftheabyss.model.entity.Entity;
 import com.formiko.fragmentsoftheabyss.model.entity.Monster;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
@@ -25,6 +22,7 @@ public class GameController extends InputAdapter {
     }
 
     public void kayPress() {
+
 
         if (Gdx.input.isKeyPressed(Input.Keys.W) ||
                 Gdx.input.isKeyPressed(Input.Keys.UP)) {
@@ -104,7 +102,7 @@ public class GameController extends InputAdapter {
     public void animatMonster() {
         for (Entity monster : actor.getField().getListEntityOnField()) {
             if (monster.getId() == EntityType.MONSTER) {
-                System.out.println("Monster move");
+                // System.out.println("Monster move");
                 Optional<Entity> entity = checkCollision(monster);
                 float deltaX = player.getX() - monster.getX();
                 float deltaY = player.getY() - monster.getY();
