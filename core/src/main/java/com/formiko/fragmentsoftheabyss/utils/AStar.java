@@ -13,7 +13,8 @@ import com.formiko.fragmentsoftheabyss.Main;
 import com.formiko.fragmentsoftheabyss.model.Coordinates;
 import com.formiko.fragmentsoftheabyss.model.entity.Entity;
 
-public class AStar {
+public final class AStar {
+    private AStar() {}
     public static List<Coordinates> findPath(Entity entity, Entity target) {
         PriorityQueue<Node> openList = new PriorityQueue<>();
         Set<Node> closedList = new HashSet<>();
