@@ -76,15 +76,19 @@ public abstract class Entity {
     }
 
     public void moveTo(Coordinates next) {
-        float deltaX = next.x() - this.x;
-        float deltaY = next.y() - this.y;
-        if (Math.abs(deltaX) < 1 && Math.abs(deltaY) < 1) {
-            this.x = next.x();
-            this.y = next.y();
-            path.remove(0);
-        } else {
-            move(deltaX, deltaY);
-        }
+        // float deltaX = next.x() - this.x;
+        // float deltaY = next.y() - this.y;
+        // if (Math.abs(deltaX) < 1 && Math.abs(deltaY) < 1) {
+        //     this.x = next.x();
+        //     this.y = next.y();
+        //     path.remove(0);
+        // } else {
+        //     move(deltaX, deltaY);
+        // }
+        setCenterX(next.x());
+        setCenterY(next.y());
+        path.remove(0);
+        moveInsideScreenIfNeeded();
     }
 
     public Rectangle getBounds() {
@@ -124,6 +128,12 @@ public abstract class Entity {
     }
     public float getCenterY() {
         return y + height / 2;
+    }
+    public void setCenterX(float centerX) {
+        setX(centerX - width / 2);
+    }
+    public void setCenterY(float centerY) {
+        setY(centerY - height / 2);
     }
 
 }

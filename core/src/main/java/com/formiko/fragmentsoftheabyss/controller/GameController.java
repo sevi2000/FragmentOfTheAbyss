@@ -27,28 +27,28 @@ public class GameController extends InputAdapter {
         if (Gdx.input.isKeyPressed(Input.Keys.W) ||
                 Gdx.input.isKeyPressed(Input.Keys.UP)) {
             player.move(0, 1);
-            if (checkCollision(player).isPresent()) {
+            if (checkCollisionWithBox(player).isPresent()) {
                 player.move(0, -1);
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S) ||
                 Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             player.move(0, -1);
-            if (checkCollision(player).isPresent()) {
+            if (checkCollisionWithBox(player).isPresent()) {
                 player.move(0, 1);
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.Q) ||
                 Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             player.move(-1, 0);
-            if (checkCollision(player).isPresent()) {
+            if (checkCollisionWithBox(player).isPresent()) {
                 player.move(1, 0);
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D) ||
                 Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             player.move(1, 0);
-            if (checkCollision(player).isPresent()) {
+            if (checkCollisionWithBox(player).isPresent()) {
                 player.move(-1, 0);
             }
         }
@@ -122,12 +122,27 @@ public class GameController extends InputAdapter {
                 //  * item.move(1, 0);
                 //  */
                 monster.moveToTarget(player);
+                // if(checkCollisionWithPlayer(monster).isPresent()){
+                //     player.damage(((Monster) monster).getAttack());
+                // }
             }
+        }
+        Monster hittingPlayerMonster = (Monster) checkCollisionWithMonster(player).orElse(null);
+        if(hittingPlayerMonster != null){
+            player.damage(hittingPlayerMonster.getAttack());
         }
     }
     
-    public Optional<Entity> checkCollision(Entity current) {
-        for (Entity item : actor.getField().getListEntityOnField()) {
+    public Optional<Entity> checkCollisionWithMonster(Entity current) {
+        for (Entity item : actor.getField().getMonsterEntity()) {
+            if (current != item && current.collidesWith(item)) {
+                return Optional.of(item);
+            }
+        }
+        return Optional.empty();
+    }
+    public Optional<Entity> checkCollisionWithBox(Entity current) {
+        for (Entity item : actor.getField().getBoxEntity()) {
             if (current != item && current.collidesWith(item)) {
                 return Optional.of(item);
             }
@@ -135,7 +150,7 @@ public class GameController extends InputAdapter {
         return Optional.empty();
     }
     public boolean isColliding(Entity current) {
-        return checkCollision(current).isPresent();
+        return checkCollisionWithBox(current).isPresent();
     }
     public boolean canMoveThere(Entity current) {
         if(isColliding(current)){

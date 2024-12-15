@@ -18,14 +18,14 @@ public class AStar {
         PriorityQueue<Node> openList = new PriorityQueue<>();
         Set<Node> closedList = new HashSet<>();
 
-        Node start = new Node((int) entity.getX(), (int) entity.getY());
+        Node start = new Node((int) entity.getCenterX(), (int) entity.getCenterY());
         Node end = new Node((int) target.getCenterX(), (int) target.getCenterY());
 
         openList.add(start);
 
         int k = 0;
 
-        while (!openList.isEmpty() && k < 10000) {
+        while (!openList.isEmpty() && k < 1000000) {
             k++;
             Node current = openList.poll();
             closedList.add(current);
@@ -62,9 +62,9 @@ public class AStar {
                 }
             }
         }
-        if(k >= 10000) {
-            System.out.println("Path not found");
-        }
+        // if(k >= 10000) {
+        //     System.out.println("Path not found");
+        // }
         return Collections.emptyList();
     }
     private static List<Coordinates> reconstructPath(Node node) {
@@ -75,16 +75,16 @@ public class AStar {
         }
         Collections.reverse(path);
         List<Coordinates> coordinates = path.stream().map(n -> new Coordinates(n.x, n.y)).collect(LinkedList::new, LinkedList::add, LinkedList::addAll);
-        System.out.println(coordinates);
+        // System.out.println(coordinates);
         return coordinates;
 
     }
     private static double heuristic(Node a, Node b) {
         return Math.abs(a.x - b.x) + Math.abs(a.y - b.y); // Manhattan Distance
     }
-    private static boolean isUnreachableCoordinate(int x, int y, int width, int height) {
+    private static boolean isUnreachableCoordinate(int centerX, int centerY, int width, int height) {
         List<Entity> box = Main.getField().getBoxEntity();
-        Rectangle entityBounds = new Rectangle(x, y, width, height);
+        Rectangle entityBounds = new Rectangle(centerX - (width/2f) +1, centerY - (height/2f) +1, width -1, height -1);
         for (Entity entity : box) {
             if(entity.getBounds().overlaps(entityBounds)) {
                 return true;

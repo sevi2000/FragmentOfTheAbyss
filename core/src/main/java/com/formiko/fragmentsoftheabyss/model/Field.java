@@ -68,4 +68,8 @@ public class Field {
    public List<Entity> getBoxEntity() {
       return listEntityOnField.stream().filter(e -> e.getId() == EntityType.BOX).toList();
    }
+   public List<Entity> getMonsterEntity() {
+      return listEntityOnField.stream().filter(e -> e.getId() == EntityType.MONSTER).toList();
+   }
+   
 }
