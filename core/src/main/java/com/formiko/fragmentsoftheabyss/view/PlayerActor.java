@@ -1,7 +1,5 @@
 package com.formiko.fragmentsoftheabyss.view;
 
-import org.w3c.dom.Text;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -28,6 +26,7 @@ public class PlayerActor extends Actor {
         super.act(delta);
         setX(player.getX());
         setY(player.getY());
+        GameScreen.getCamera().position.set(getX(), getY(), 0);
     }
 
     @Override

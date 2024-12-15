@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.formiko.fragmentsoftheabyss.controller.GameController;
 import com.formiko.fragmentsoftheabyss.model.Coordinates;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 import com.formiko.fragmentsoftheabyss.utils.AStar;
@@ -100,14 +101,14 @@ public abstract class Entity {
         if (this.x < 0) {
             this.x = 0;
         }
-        if (this.x > Gdx.graphics.getWidth() - this.width) {
-            this.x = Gdx.graphics.getWidth() - this.width;
+        if (this.x > GameController.FIELD_SIZE - this.width) {
+            this.x = GameController.FIELD_SIZE - this.width;
         }
         if (this.y < 0) {
             this.y = 0;
         }
-        if (this.y > Gdx.graphics.getHeight() - this.height) {
-            this.y = Gdx.graphics.getHeight() - this.height;
+        if (this.y > GameController.FIELD_SIZE - this.height) {
+            this.y = GameController.FIELD_SIZE - this.height;
         }
     }
 

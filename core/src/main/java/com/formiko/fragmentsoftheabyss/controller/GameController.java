@@ -16,7 +16,7 @@ import com.formiko.fragmentsoftheabyss.view.MonsterActor;
 public class GameController extends InputAdapter {
     private final Player player;
     public FieldActor actor;
-    public int FIELD_SIZE = 1000;
+    public static int FIELD_SIZE = 1000;
 
     public GameController(Player player, FieldActor actor) {
         this.player = player;
