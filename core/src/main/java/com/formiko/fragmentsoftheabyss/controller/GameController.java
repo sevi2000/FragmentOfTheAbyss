@@ -88,7 +88,7 @@ public class GameController extends InputAdapter {
     if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
             player.revive(100);
         }
-        if (checkCollisionWithDoor(player).isPresent()) {
+        if (checkCollisionWithDoor(player).isPresent() && actor.getField().getDoor().isVisible()) {
             return Optional.of(true);
         }
         return Optional.empty();
