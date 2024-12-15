@@ -3,6 +3,7 @@ package com.formiko.fragmentsoftheabyss;
 import java.util.Optional;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.formiko.fragmentsoftheabyss.controller.GameController;
 import com.formiko.fragmentsoftheabyss.model.Field;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
@@ -16,9 +17,13 @@ public class Main extends Game {
     private GameController gameController;
     private static GameScreen gameScreen;
     private int level = 1;
+    public static ShapeRenderer shapeRenderer;
+    // public LabelActor labelActor;
+    // private Stage labelStage;
 
     @Override
     public void create() {
+        shapeRenderer = new ShapeRenderer();
         gameScreen = new GameScreen(level);
         Field field = gameScreen.getFieldActor().getField();
         Field field2 = new Field();
@@ -28,6 +33,8 @@ public class Main extends Game {
         gameController = new GameController(player, gameScreen.getFieldActor());
         Gdx.input.setInputProcessor(gameController);        
         System.out.println(field.getListEntityOnField().stream().filter(e -> e.getId() == EntityType.MONSTER).toList().size());
+        // labelStage = new Stage();
+        // setText("Level " + level);
     }
 
     @Override
@@ -45,6 +52,7 @@ public class Main extends Game {
         super.render(); 
         // gameView.render(player);
         // boxView.render();
+        // labelStage.draw();
     }
 
     @Override

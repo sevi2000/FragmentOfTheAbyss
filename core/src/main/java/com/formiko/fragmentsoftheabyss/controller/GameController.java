@@ -6,20 +6,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.formiko.fragmentsoftheabyss.Main;
 import com.formiko.fragmentsoftheabyss.model.entity.Door;
 import com.formiko.fragmentsoftheabyss.model.entity.Entity;
 import com.formiko.fragmentsoftheabyss.model.entity.Monster;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 import com.formiko.fragmentsoftheabyss.view.FieldActor;
-import com.formiko.fragmentsoftheabyss.view.GameScreen;
+import com.formiko.fragmentsoftheabyss.view.LabelActor;
 import com.formiko.fragmentsoftheabyss.view.MonsterActor;
 
 public class GameController extends InputAdapter {
     private final Player player;
     public FieldActor actor;
     public static int FIELD_SIZE = 1000;
+    public LabelActor labelActor;
 
     public GameController(Player player, FieldActor actor) {
         this.player = player;

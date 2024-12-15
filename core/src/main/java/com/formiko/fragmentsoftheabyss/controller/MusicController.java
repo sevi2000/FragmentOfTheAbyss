@@ -11,7 +11,7 @@ public class MusicController {
         }
         MusicController.music = music;
         MusicController.music.setLooping(true);
-        // MusicController.music.play();
+        MusicController.music.play();
     }
     public static void playMainMusic(){
         MusicController.playMusic(Gdx.audio.newMusic(Gdx.files.internal("musics/main.mp3")));
