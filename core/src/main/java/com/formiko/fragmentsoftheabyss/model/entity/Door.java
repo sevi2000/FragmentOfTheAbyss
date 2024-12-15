@@ -2,7 +2,6 @@ package com.formiko.fragmentsoftheabyss.model.entity;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 import lombok.Builder;
 
@@ -29,7 +28,7 @@ public class Door extends Entity{
         // Check if a match is found
         if (matcher.find()) {
             // Print the matched pattern
-            System.out.println("Match found: " + matcher.group());
+            // System.out.println("Match found: " + matcher.group());
             Box box = Box.builder()
                     .x(Integer.parseInt(matcher.group(4)))
                     .y(Integer.parseInt(matcher.group(5)))
@@ -39,7 +38,7 @@ public class Door extends Entity{
                 .build();
             return box;
         } else {
-            System.out.println("No match found.");
+            // System.out.println("No match found.");
             return null;
         }
     }

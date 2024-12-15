@@ -52,16 +52,16 @@ public class MonsterActor extends Actor {
         shapeRenderer.setColor(Color.BLACK);
         shapeRenderer.end();
 
-        // Debugging hitbox
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.rect(getX()*getScaleX(), getY()*getScaleY(), getWidth()*getScaleX(), getHeight()*getScaleY());
-        shapeRenderer.end();
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Point);
-        shapeRenderer.setColor(Color.BLUE);
-        for (int i = 0; i < monster.getPath().size(); i++) {
-            shapeRenderer.point(monster.getPath().get(i).x(), monster.getPath().get(i).y(), 0);
-        }
-        shapeRenderer.end();
+        // // Debugging hitbox
+        // shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        // shapeRenderer.rect(getX()*getScaleX(), getY()*getScaleY(), getWidth()*getScaleX(), getHeight()*getScaleY());
+        // shapeRenderer.end();
+        // shapeRenderer.begin(ShapeRenderer.ShapeType.Point);
+        // shapeRenderer.setColor(Color.BLUE);
+        // for (int i = 0; i < monster.getPath().size(); i++) {
+        //     shapeRenderer.point(monster.getPath().get(i).x(), monster.getPath().get(i).y(), 0);
+        // }
+        // shapeRenderer.end();
         batch.begin();
     }
 

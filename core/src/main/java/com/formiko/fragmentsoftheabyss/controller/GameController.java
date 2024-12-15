@@ -65,7 +65,7 @@ public class GameController extends InputAdapter {
             player.revive(100);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            int radius = 100;
+            int radius = 150;
             Monster monster = actor.getField().getListEntityOnField().stream()
                     .filter(e -> e.getId() == EntityType.MONSTER)
                     .map(e -> (Monster) e)

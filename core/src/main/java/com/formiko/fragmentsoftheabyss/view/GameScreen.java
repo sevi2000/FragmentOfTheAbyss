@@ -21,8 +21,10 @@ public class GameScreen implements Screen {
     @Getter
     private FieldActor fieldActor;
     private LabelActor labelActor;
+    public static GameScreen instance;
 
     public GameScreen(int level) {
+        instance = this;
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         // Make the camera zoom *2 over the level
@@ -86,15 +88,15 @@ public class GameScreen implements Screen {
         // playerUIView.dispose();
     }
 
-    public void setText(@Null String text){
-        if(labelActor != null) {
-            labelActor.remove();
+    public static void setText(@Null String text){
+        if(instance.labelActor != null) {
+            instance.labelActor.remove();
         }
         if(text != null) {
-            labelActor = new LabelActor(text);
-            labelActor.setPosition(0, 0);
+            instance.labelActor = new LabelActor(text);
+            instance.labelActor.setPosition(0, 0);
             // labelStage.addActor(labelActor);
-            addActor(labelActor);
+            instance.addActor(instance.labelActor);
         }
     }
 }
