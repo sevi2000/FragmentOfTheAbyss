@@ -69,22 +69,13 @@ public abstract class Entity {
             Coordinates next = path.get(0);
             moveTo(next);
             //  every second clear the path to recalculate it
-            if (Gdx.graphics.getFrameId() % 60 == 0) {
+            if (Gdx.graphics.getFrameId() % Gdx.graphics.getFramesPerSecond() == 0) {
                 path = List.of();
             }
         }
     }
 
     public void moveTo(Coordinates next) {
-        // float deltaX = next.x() - this.x;
-        // float deltaY = next.y() - this.y;
-        // if (Math.abs(deltaX) < 1 && Math.abs(deltaY) < 1) {
-        //     this.x = next.x();
-        //     this.y = next.y();
-        //     path.remove(0);
-        // } else {
-        //     move(deltaX, deltaY);
-        // }
         setCenterX(next.x());
         setCenterY(next.y());
         path.remove(0);

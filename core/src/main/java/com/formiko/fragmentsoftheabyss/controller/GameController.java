@@ -101,30 +101,7 @@ public class GameController extends InputAdapter {
     public void animatMonster() {
         for (Entity monster : actor.getField().getListEntityOnField()) {
             if (monster.getId() == EntityType.MONSTER) {
-                // // System.out.println("Monster move");
-                // Optional<Entity> entity = checkCollision(monster);
-                // float deltaX = player.getX() - monster.getX();
-                // float deltaY = player.getY() - monster.getY();
-                // if (entity.isPresent() && entity.get().getId() == EntityType.BOX) {
-                //     deltaX = new Random().nextInt(/*actor.getField().getWidth()*/FIELD_SIZE) - monster.getX();
-                //     deltaY = new Random().nextInt(FIELD_SIZE)+ 500 - monster.getY();
-                //     moveToPosition(monster, deltaX, deltaY);
-                // } else if (entity.isPresent() && entity.get().getId() == EntityType.PLAYER) {
-                //     player.damage(((Monster) monster).getAttack());
-                // } else {
-                //     moveToPosition(monster, deltaX, deltaY);
-                // }
-
-                // /*
-                //  * if (checkCollision()) {
-                //  * item.move(-1, 0);
-                //  * }
-                //  * item.move(1, 0);
-                //  */
                 monster.moveToTarget(player);
-                // if(checkCollisionWithPlayer(monster).isPresent()){
-                //     player.damage(((Monster) monster).getAttack());
-                // }
             }
         }
         Monster hittingPlayerMonster = (Monster) checkCollisionWithMonster(player).orElse(null);
