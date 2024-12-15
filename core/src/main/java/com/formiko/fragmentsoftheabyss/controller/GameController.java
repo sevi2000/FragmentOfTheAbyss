@@ -83,7 +83,6 @@ public class GameController extends InputAdapter {
     }
 
     private void moveToPosition(Entity item, float deltaX, float deltaY) {
-
         if (Math.abs(deltaX) > Math.abs(deltaY)) {
             if (deltaX > 0) {
                 item.move(1, 0);
@@ -98,34 +97,25 @@ public class GameController extends InputAdapter {
             }
         }
     }
-
+    
     public void animatMonster() {
         for (Entity monster : actor.getField().getListEntityOnField()) {
             if (monster.getId() == EntityType.MONSTER) {
-                // System.out.println("Monster move");
                 Optional<Entity> entity = checkCollision(monster);
                 float deltaX = player.getX() - monster.getX();
                 float deltaY = player.getY() - monster.getY();
+    
                 if (entity.isPresent() && entity.get().getId() == EntityType.BOX) {
-                    deltaX = new Random().nextInt(/*actor.getField().getWidth()*/1000) - monster.getX();
-                    deltaY = new Random().nextInt(1000)+ 500 - monster.getY();
-                    moveToPosition(monster, deltaX, deltaY);
+                    avoidBox(monster, entity.get());
                 } else if (entity.isPresent() && entity.get().getId() == EntityType.PLAYER) {
                     player.damage(((Monster) monster).getAttack());
                 } else {
                     moveToPosition(monster, deltaX, deltaY);
                 }
-
-                /*
-                 * if (checkCollision()) {
-                 * item.move(-1, 0);
-                 * }
-                 * item.move(1, 0);
-                 */
             }
         }
     }
-
+    
     public Optional<Entity> checkCollision(Entity current) {
         for (Entity item : actor.getField().getListEntityOnField()) {
             if (current != item && current.collidesWith(item)) {
@@ -133,5 +123,25 @@ public class GameController extends InputAdapter {
             }
         }
         return Optional.empty();
+    }
+    
+    private void avoidBox(Entity monster, Entity box) {
+        float deltaX = player.getX() - monster.getX();
+        float deltaY = player.getY() - monster.getY();
+    
+        // Determine the direction to avoid the box
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            if (deltaX > 0) {
+                monster.move(0, 1); // Move up
+            } else {
+                monster.move(0, -1); // Move down
+            }
+        } else {
+            if (deltaY > 0) {
+                monster.move(-1, 0); // Move left
+            } else {
+                monster.move(1, 0); // Move right
+            }
+        }
     }
 }
