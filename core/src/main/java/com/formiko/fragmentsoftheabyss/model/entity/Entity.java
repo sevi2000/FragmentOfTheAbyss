@@ -61,15 +61,18 @@ public abstract class Entity {
         Gdx.app.log("Entity", "Move of " + deltaX + " " + deltaY + " " + speed + " in "+ Gdx.graphics.getWidth() + " " + Gdx.graphics.getHeight());
     }
 
+    private long lastTimePathCalculate;
+    private long eachMsTimeToRecalculate = 1000;
     public void moveToTarget(Entity target) {
         if (path.isEmpty()) {
             path = AStar.findPath(this, target);
+            lastTimePathCalculate = System.currentTimeMillis();
         }
         if (!path.isEmpty()) {
             Coordinates next = path.get(0);
             moveTo(next);
             //  every second clear the path to recalculate it
-            if (Gdx.graphics.getFrameId() % Gdx.graphics.getDeltaTime() == 0) {
+            if(System.currentTimeMillis() - lastTimePathCalculate > eachMsTimeToRecalculate) {
                 path = List.of();
             }
         }
