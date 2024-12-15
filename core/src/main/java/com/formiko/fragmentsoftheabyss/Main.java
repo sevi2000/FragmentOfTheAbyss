@@ -48,6 +48,11 @@ public class Main extends Game {
             } else {
                 create();
             }
+        } else if (player.getHealth() <= 0) {
+            System.out.println("You lose");
+            level = 1;
+            create();
+            
         }
         super.render(); 
         // gameView.render(player);

@@ -28,6 +28,10 @@ public class GameController extends InputAdapter {
     }
 
     public Optional<Boolean> kayPress() {
+        if (player.getHealth() <= 0) {
+            return Optional.of(false);
+            
+        }
         if (Gdx.input.isKeyPressed(Input.Keys.W) ||
                 Gdx.input.isKeyPressed(Input.Keys.UP)) {
             player.move(0, 1);
