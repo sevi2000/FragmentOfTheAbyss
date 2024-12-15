@@ -110,7 +110,7 @@ public class GameController extends InputAdapter {
     
     public void animatMonster() {
         for (Entity monster : actor.getField().getListEntityOnField()) {
-            if (monster.getId() == EntityType.MONSTER) {
+            if (monster.getId() == EntityType.MONSTER && monster.canSee(player)) {
                 monster.moveToTarget(player);
             }
         }

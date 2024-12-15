@@ -35,8 +35,9 @@ public abstract class Entity {
     protected float width;
     protected float height;
     protected List<Coordinates> path;
+    protected float seeRadius;
 
-    public Entity(EntityType id, int health, float x, float y, int maxHealth, int speed, float width, float height) {
+    protected Entity(EntityType id, int health, float x, float y, int maxHealth, int speed, float width, float height) {
         this.id = id;
         this.health = health;
         this.x = x;
@@ -46,6 +47,7 @@ public abstract class Entity {
         this.width = width;
         this.height = height;
         this.path = List.of();
+        seeRadius = 400;
     }
 
     public void move(float deltaX, float deltaY) {
@@ -129,5 +131,7 @@ public abstract class Entity {
     public void setCenterY(float centerY) {
         setY(centerY - height / 2);
     }
-
+    public boolean canSee(Entity target) {
+        return Math.sqrt(Math.pow(target.getCenterX() - getCenterX(), 2) + Math.pow(target.getCenterY() - getCenterY(), 2)) < seeRadius;
+    }
 }
