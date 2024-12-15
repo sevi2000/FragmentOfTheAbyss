@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Align;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
+import com.formiko.fragmentsoftheabyss.utils.TextureGenerator;
 
 public class PlayerActor extends Actor {
     private final Texture playerTexture;
@@ -14,7 +15,7 @@ public class PlayerActor extends Actor {
     private final ShapeRenderer shapeRenderer;
 
     public PlayerActor(Player player) {
-        playerTexture = new Texture("player.png");
+        playerTexture = TextureGenerator.getTexture(TextureGenerator.TextureType.PLAYER);
         this.player = player;
         shapeRenderer = new ShapeRenderer();
         setBounds(player.getX(), player.getY(), player.getWidth(), player.getHeight());
@@ -25,6 +26,7 @@ public class PlayerActor extends Actor {
         super.act(delta);
         setX(player.getX());
         setY(player.getY());
+        GameScreen.getCamera().position.set(getX(), getY(), 0);
     }
 
     @Override

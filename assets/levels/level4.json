@@ -1,0 +1,91 @@
+{
+    "player": {
+        "type": "PLAYER",
+        "id": "PLAYER",
+        "health": 150,
+        "x": 100.0,
+        "y": 100.0,
+        "maxHealth": 150,
+        "speed": 10,
+        "width": 60.0,
+        "height": 80.0,
+        "name": null,
+        "experience": 50,
+        "gold": 50,
+        "attack": 15,
+        "defense": 8
+    },
+    "width": 1200,
+    "height": 1200,
+    "listEntityOnField": [
+        {
+            "type": "BOX",
+            "id": "BOX",
+            "health": 100,
+            "x": 300.0,
+            "y": 300.0,
+            "maxHealth": 100,
+            "speed": 0,
+            "width": 50.0,
+            "height": 50.0
+        },
+        {
+            "type": "BOX",
+            "id": "BOX",
+            "health": 100,
+            "x": 800.0,
+            "y": 600.0,
+            "maxHealth": 100,
+            "speed": 0,
+            "width": 50.0,
+            "height": 50.0
+        },
+        {
+            "type": "BOX",
+            "id": "BOX",
+            "health": 100,
+            "x": 1000.0,
+            "y": 800.0,
+            "maxHealth": 100,
+            "speed": 0,
+            "width": 50.0,
+            "height": 50.0
+        },
+        {
+            "type": "MONSTER",
+            "id": "MONSTER",
+            "health": 300,
+            "x": 700.0,
+            "y": 200.0,
+            "maxHealth": 300,
+            "speed": 3,
+            "width": 60.0,
+            "height": 80.0,
+            "attack": 10
+        },
+        {
+            "type": "MONSTER",
+            "id": "MONSTER",
+            "health": 300,
+            "x": 300.0,
+            "y": 1000.0,
+            "maxHealth": 300,
+            "speed": 3,
+            "width": 60.0,
+            "height": 80.0,
+            "attack": 10
+        },
+        {
+            "type": "MONSTER",
+            "id": "MONSTER",
+            "health": 300,
+            "x": 1000.0,
+            "y": 500.0,
+            "maxHealth": 300,
+            "speed": 3,
+            "width": 60.0,
+            "height": 80.0,
+            "attack": 10
+        }
+    ]
+}

@@ -6,6 +6,7 @@ public enum EntityType {
     BOX,
     MONSTER,
     ITEM,
-    BLOC
+    BLOC,
+    DOOR
 
 }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.formiko.fragmentsoftheabyss.controller.GameController;
 import com.formiko.fragmentsoftheabyss.model.Coordinates;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 import com.formiko.fragmentsoftheabyss.utils.AStar;
@@ -20,7 +21,8 @@ import lombok.Setter;
 @JsonSubTypes({
     @JsonSubTypes.Type(value = Box.class, name = "BOX"),
     @JsonSubTypes.Type(value = Player.class, name = "PLAYER"),
-    @JsonSubTypes.Type(value = Monster.class, name = "MONSTER")
+    @JsonSubTypes.Type(value = Monster.class, name = "MONSTER"),
+    @JsonSubTypes.Type(value = Door.class, name = "DOOR")
 })
 @AllArgsConstructor
 @Getter
@@ -64,7 +66,7 @@ public abstract class Entity {
     }
 
     private long lastTimePathCalculate;
-    private long eachMsTimeToRecalculate = 1000;
+    private long eachMsTimeToRecalculate = 300;
     public void moveToTarget(Entity target) {
         if (path.isEmpty()) {
             path = AStar.findPath(this, target);
@@ -99,14 +101,14 @@ public abstract class Entity {
         if (this.x < 0) {
             this.x = 0;
         }
-        if (this.x > Gdx.graphics.getWidth() - this.width) {
-            this.x = Gdx.graphics.getWidth() - this.width;
+        if (this.x > GameController.FIELD_SIZE - this.width) {
+            this.x = GameController.FIELD_SIZE - this.width;
         }
         if (this.y < 0) {
             this.y = 0;
         }
-        if (this.y > Gdx.graphics.getHeight() - this.height) {
-            this.y = Gdx.graphics.getHeight() - this.height;
+        if (this.y > GameController.FIELD_SIZE - this.height) {
+            this.y = GameController.FIELD_SIZE - this.height;
         }
     }
 

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Align;
 import com.formiko.fragmentsoftheabyss.model.entity.Monster;
+import com.formiko.fragmentsoftheabyss.utils.TextureGenerator;
 
 public class MonsterActor extends Actor {
     private final Texture monsterTexture;
@@ -14,7 +15,7 @@ public class MonsterActor extends Actor {
     private final ShapeRenderer shapeRenderer;
 
     public MonsterActor(Monster monster) {
-        monsterTexture = new Texture("enemy.png");
+        monsterTexture = TextureGenerator.getTexture(TextureGenerator.TextureType.MONSTER);
         this.monster = monster;
         shapeRenderer = new ShapeRenderer();
         setBounds(monster.getX(), monster.getY(), monster.getWidth(), monster.getHeight());

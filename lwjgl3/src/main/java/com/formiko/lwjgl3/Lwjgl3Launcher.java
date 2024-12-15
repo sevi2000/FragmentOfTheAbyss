@@ -1,5 +1,7 @@
 package com.formiko.lwjgl3;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.formiko.fragmentsoftheabyss.Main;
@@ -29,9 +31,11 @@ public class Lwjgl3Launcher {
         //// You may also need to configure GPU drivers to fully disable Vsync; this can cause screen tearing.
         // configuration.setWindowedMode(640, 480);
         // configuration.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
-        // configuration.setMaximized(true);
+        // configuration.setMaximized(true);  // create issues on linux. cf https://github.com/libgdx/libgdx/issues/7089
+        // configuration.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
         // configuration.setWindowedMode(500, 500);
-        configuration.setWindowedMode(1000, 1000);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        configuration.setWindowedMode((int)screenSize.getWidth(), (int)screenSize.getHeight());
         //// You can change these files; they are in lwjgl3/src/main/resources/ .
         configuration.setWindowIcon("libgdx128.png", "libgdx64.png", "libgdx32.png", "libgdx16.png");
         return configuration;

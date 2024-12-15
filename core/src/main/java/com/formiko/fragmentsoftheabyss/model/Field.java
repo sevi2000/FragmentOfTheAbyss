@@ -3,6 +3,7 @@ package com.formiko.fragmentsoftheabyss.model;
 import java.util.ArrayList;
 import java.util.List;
 import com.badlogic.gdx.Gdx;
+import com.formiko.fragmentsoftheabyss.model.entity.Door;
 import com.formiko.fragmentsoftheabyss.model.entity.Entity;
 import com.formiko.fragmentsoftheabyss.model.entity.Monster;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
@@ -30,8 +31,8 @@ public class Field {
       .width(50)
       .height(50)
       .build();
-      Monster monster = Monster.builder().x(200).y(200).width(50).height(50).build();
-      listEntityOnField.add(monster);
+      Door door = Door.builder().x(200).y(200).width(100).height(100).build();
+      listEntityOnField.add(door);
    }
         
    public String toJson() {
@@ -71,8 +72,19 @@ public class Field {
    public List<Entity> getMonsterEntity() {
       return listEntityOnField.stream().filter(e -> e.getId() == EntityType.MONSTER).toList();
    }
+   public boolean isThereMonster() {
+      return listEntityOnField.stream().anyMatch(e -> e.getId() == EntityType.MONSTER);
+   }
 
 public void removeEntity(Entity entity) {
    listEntityOnField.remove(entity);
+}
+
+public void openDoor() {
+   listEntityOnField.stream().filter(e -> e.getId() == EntityType.DOOR).map(e -> (Door) e).findFirst().ifPresent(Door::open);   
+}
+
+public Door getDoor() {
+   return (Door) listEntityOnField.stream().filter(e -> e.getId() == EntityType.DOOR).findFirst().orElse(null); 
 }
 }

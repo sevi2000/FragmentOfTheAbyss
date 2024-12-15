@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.formiko.fragmentsoftheabyss.model.entity.Box;
+import com.formiko.fragmentsoftheabyss.model.entity.Door;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
 import com.formiko.fragmentsoftheabyss.model.entity.Entity;
 import com.formiko.fragmentsoftheabyss.model.entity.Monster;
@@ -60,8 +61,19 @@ public class FieldActor extends Group {
                 MonsterActor monsterActor = new MonsterActor(monster);
                 monsterActor.setSize(monster.getWidth(), monster.getHeight());
                 addActor(monsterActor);
+                 
+            } else if (entity instanceof Door && ((Door) entity).isVisible()) {
+                Door door = (Door) entity;
+                DoorActor doorActor = new DoorActor(door);
+                doorActor.setSize(door.getWidth(), door.getHeight());
+                addActor(doorActor);
                 
             }
         }
+    }
+    public void addDoor(Door door) {
+        DoorActor doorActor = new DoorActor(door);
+        doorActor.setSize(door.getWidth(), door.getHeight());
+        addActorAt(0, doorActor);
     }
 }

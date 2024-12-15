@@ -9,9 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import lombok.Getter;
-
 import com.formiko.fragmentsoftheabyss.model.Field;
+import lombok.Getter;
 
 public class GameScreen implements Screen {
     private static Viewport viewport;
@@ -24,8 +23,10 @@ public class GameScreen implements Screen {
     public GameScreen(String path) {
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
+        // Make the camera zoom *2 over the level
         // camera.setToOrtho(false, 1000, 1000);
-        viewport = new FitViewport(1000, 1000, camera);
+        camera.zoom = 0.5f * (1080f / Gdx.graphics.getHeight());
+        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         stage = new Stage(viewport, batch);
         fieldActor = new FieldActor(Field.fromFile(path));
         fieldActor.setSize(1000, 1000);

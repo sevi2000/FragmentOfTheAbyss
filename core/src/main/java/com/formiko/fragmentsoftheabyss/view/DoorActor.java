@@ -5,16 +5,17 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.formiko.fragmentsoftheabyss.model.entity.Box;
+import com.formiko.fragmentsoftheabyss.model.entity.Door;
 import com.formiko.fragmentsoftheabyss.utils.TextureGenerator;
 
-public class BoxActor extends Actor {
+public class DoorActor extends Actor {
     private final Texture texture;
     private final SpriteBatch batch;
 
-    public BoxActor(Box box) {
-        this.texture = TextureGenerator.getTexture(TextureGenerator.TextureType.BOX);
+    public DoorActor(Door door) {
+        this.texture = TextureGenerator.getTexture(TextureGenerator.TextureType.DOOR);
         this.batch = new SpriteBatch();
-        setBounds(box.getX(), box.getY(), box.getWidth(), box.getHeight());
+        setBounds(door.getX(), door.getY(), door.getWidth(), door.getHeight());
     }
     
     @Override
