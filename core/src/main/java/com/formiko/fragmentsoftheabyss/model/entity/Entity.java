@@ -66,7 +66,7 @@ public abstract class Entity {
     }
 
     private long lastTimePathCalculate;
-    private long eachMsTimeToRecalculate = 1000;
+    private long eachMsTimeToRecalculate = 300;
     public void moveToTarget(Entity target) {
         if (path.isEmpty()) {
             path = AStar.findPath(this, target);
