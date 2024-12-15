@@ -54,20 +54,10 @@ public abstract class Entity {
         deltaX *= delta*60;
         deltaY *= delta*60;
 
-        // // Do not move out of the screen
-        // if ((this.x + deltaX * speed > Gdx.graphics.getWidth() - getWidth() || this.x + deltaX * speed < 0)) {
-        //     deltaX = 0;
-        // }
-        // if (this.y + deltaY * speed > Gdx.graphics.getHeight() - getWidth()|| this.y + deltaY * speed < 0) {
-        //     deltaY = 0;
-        // }
-        // System.out.println("x: " + this.x + " y: " + this.y);
         this.x += deltaX * speed;
         this.y += deltaY * speed;
-        // System.out.println("x1: " + this.x + " y1: " + this.y);
 
         moveInsideScreenIfNeeded();
-        // System.out.println("Move of " + deltaX + " " + deltaY + " " + speed + " in "+ Gdx.graphics.getWidth() + " " + Gdx.graphics.getHeight());
         Gdx.app.log("Entity", "Move of " + deltaX + " " + deltaY + " " + speed + " in "+ Gdx.graphics.getWidth() + " " + Gdx.graphics.getHeight());
     }
 

@@ -83,7 +83,6 @@ public class GameController extends InputAdapter {
     }
 
     private void moveToPosition(Entity item, float deltaX, float deltaY) {
-
         if (Math.abs(deltaX) > Math.abs(deltaY)) {
             if (deltaX > 0) {
                 item.move(1, 0);
@@ -98,7 +97,7 @@ public class GameController extends InputAdapter {
             }
         }
     }
-
+    
     public void animatMonster() {
         for (Entity monster : actor.getField().getListEntityOnField()) {
             if (monster.getId() == EntityType.MONSTER) {
@@ -126,7 +125,7 @@ public class GameController extends InputAdapter {
             }
         }
     }
-
+    
     public Optional<Entity> checkCollision(Entity current) {
         for (Entity item : actor.getField().getListEntityOnField()) {
             if (current != item && current.collidesWith(item)) {
