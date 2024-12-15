@@ -25,7 +25,7 @@ public class GameScreen implements Screen {
         camera = new OrthographicCamera();
         // Make the camera zoom *2 over the level
         // camera.setToOrtho(false, 1000, 1000);
-        camera.zoom = 0.5f * (Gdx.graphics.getHeight() / 1080f);
+        camera.zoom = 0.5f * (1080f / Gdx.graphics.getHeight());
         viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         stage = new Stage(viewport, batch);
         fieldActor = new FieldActor(Field.fromFile(path));
