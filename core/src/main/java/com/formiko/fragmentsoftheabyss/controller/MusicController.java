@@ -18,7 +18,7 @@ public class MusicController {
     }
 
     public static void playSoundEffect(EffectType effectType){
-        MusicController.playMusic(Gdx.audio.newMusic(Gdx.files.internal(effectType.getFilePath())),true);
+        MusicController.playMusic(Gdx.audio.newMusic(Gdx.files.internal(effectType.getFilePath())),false);
         System.out.println("play sound effect");
     }
 }

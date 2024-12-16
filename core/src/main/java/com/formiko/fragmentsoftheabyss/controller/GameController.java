@@ -73,6 +73,7 @@ public class GameController extends InputAdapter {
                     .filter(e -> e.getY() < player.getY() + player.getHitRadius() && e.getY() > player.getY() - player.getHitRadius()).findFirst()
                     .orElse(null);
             if (monster != null) {
+                MusicController.playSoundEffect(EffectType.MonsterAttack);
                 monster.damage(player.getAttack());
                 if (monster.getHealth() <= 0) {
                 Actor monsterActor  = List.of(actor.getChildren()
