@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.formiko.fragmentsoftheabyss.model.entity.Door;
 import com.formiko.fragmentsoftheabyss.model.entity.Entity;
@@ -130,6 +131,7 @@ public class GameController extends InputAdapter {
         Monster hittingPlayerMonster = (Monster) checkCollisionWithMonster(player).orElse(null);
         if(hittingPlayerMonster != null){
             player.damage(hittingPlayerMonster.getAttack());
+            MusicController.playSoundEffect(EffectType.MonsterAttack);
         }
     }
     
