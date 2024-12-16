@@ -65,12 +65,11 @@ public class GameController extends InputAdapter {
             player.revive(100);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            int radius = 150;
             Monster monster = actor.getField().getListEntityOnField().stream()
                     .filter(e -> e.getId() == EntityType.MONSTER)
                     .map(e -> (Monster) e)
-                    .filter(e -> e.getX() < player.getX() + radius && e.getX() > player.getX() - radius)
-                    .filter(e -> e.getY() < player.getY() + radius && e.getY() > player.getY() - radius).findFirst()
+                    .filter(e -> e.getX() < player.getX() + player.getHitRadius() && e.getX() > player.getX() - player.getHitRadius())
+                    .filter(e -> e.getY() < player.getY() + player.getHitRadius() && e.getY() > player.getY() - player.getHitRadius()).findFirst()
                     .orElse(null);
             if (monster != null) {
                 monster.damage(player.getAttack());
@@ -134,8 +133,8 @@ public class GameController extends InputAdapter {
     }
     
     public Optional<Entity> checkCollisionWithMonster(Entity current) {
-        for (Entity item : actor.getField().getMonsterEntity()) {
-            if (current != item && current.collidesWith(item)) {
+        for (Monster item : actor.getField().getMonsterEntity()) {
+            if (current != item && (current.collidesWith(item) || (current.getX() < item.getX() + item.getHitRadius() && current.getX() > item.getX() - item.getHitRadius()) && (current.getY() < item.getY() + item.getHitRadius() && current.getY() > item.getY() - item.getHitRadius()))) {
                 return Optional.of(item);
             }
         }

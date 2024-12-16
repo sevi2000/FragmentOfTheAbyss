@@ -26,7 +26,7 @@ public class Main extends Game {
         gameScreen = new GameScreen(level);
         Field field = gameScreen.getFieldActor().getField();
         Field field2 = new Field();
-        // System.out.println(field2.toJson());
+        System.out.println(field2.toJson());
         player = field.getPlayer();
         setScreen(gameScreen);
         gameController = new GameController(player, gameScreen.getFieldActor());

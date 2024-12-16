@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Align;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
@@ -50,6 +51,10 @@ public class PlayerActor extends Actor {
         shapeRenderer.setColor(Color.GREEN);
         shapeRenderer.rect(x, y, barWidth * healPercentage, barHeight);
 
+        shapeRenderer.setColor(Color.WHITE);
+        shapeRenderer.setAutoShapeType(true);
+        shapeRenderer.set(ShapeType.Line);
+        shapeRenderer.circle(getX(Align.center), getY(Align.center), player.getHitRadius());
         shapeRenderer.setColor(Color.BLACK);
         shapeRenderer.end();
 
