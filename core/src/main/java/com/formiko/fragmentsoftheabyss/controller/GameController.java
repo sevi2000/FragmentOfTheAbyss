@@ -94,6 +94,13 @@ public class GameController extends InputAdapter {
             player.revive(100);
         }
         if (checkCollisionWithDoor(player).isPresent() && actor.getField().getDoor().isVisible()) {
+            MusicController.playSoundEffect(EffectType.PortalTravel);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             return Optional.of(true);
         }
         return Optional.empty();

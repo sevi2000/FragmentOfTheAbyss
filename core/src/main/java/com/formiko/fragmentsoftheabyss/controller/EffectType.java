@@ -1,7 +1,9 @@
 package com.formiko.fragmentsoftheabyss.controller;
 
 public enum EffectType {
-    MonsterAttack("musics/monster_attack.mp3");
+    MonsterAttack("musics/monster_attack.mp3"),
+    PortalTravel("musics/portal.mp3");
+    
     public final String filePath;
     private EffectType(String filePath){
         this.filePath = filePath;
