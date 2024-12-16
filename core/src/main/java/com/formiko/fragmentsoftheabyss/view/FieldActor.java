@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,17 +18,17 @@ import com.formiko.fragmentsoftheabyss.model.entity.Entity;
 import com.formiko.fragmentsoftheabyss.model.entity.Monster;
 import com.formiko.fragmentsoftheabyss.utils.Parser;
 import com.formiko.fragmentsoftheabyss.model.Field;
+import com.formiko.fragmentsoftheabyss.view.interfaceModel.ActorsEntity;
 import lombok.Getter;
 
 @Getter
 public class FieldActor extends Group {
+
     private final Texture mapTexture = new Texture("textures/texture.jpg");
     private final Field field;
-    
 
     public FieldActor(Field field) {
         this.field = field;
-        //setBounds(0, 0, field, field.getHeight());
         addActors();
     }
 
@@ -45,6 +46,8 @@ public class FieldActor extends Group {
     }
 
     public void addActors() {
+        System.out.println("AddActors");
+
         for (Entity entity : field.getListEntityOnField()) {
             if (entity instanceof Box) {
                 Box box = (Box) entity;
@@ -56,6 +59,7 @@ public class FieldActor extends Group {
                 PlayerActor playerActor = new PlayerActor(player);
                 playerActor.setSize(player.getWidth(), player.getHeight());
                 addActor(playerActor);
+                System.out.println("Ajout d'un nouvelle actor");
             } else if (entity instanceof Monster) {
                 Monster monster = (Monster) entity;
                 MonsterActor monsterActor = new MonsterActor(monster);
@@ -71,9 +75,29 @@ public class FieldActor extends Group {
             }
         }
     }
+
     public void addDoor(Door door) {
         DoorActor doorActor = new DoorActor(door);
         doorActor.setSize(door.getWidth(), door.getHeight());
         addActorAt(0, doorActor);
+    }
+
+    public void addEntity(Entity entity) {
+        field.getListEntityOnField().add(entity);
+    }
+    public void removeEntity(Entity entity){
+        field.getListEntityOnField().remove(entity);
+    }
+
+    public void addActorAndEntity(Actor actor) {
+        addActor(actor);
+        if (actor instanceof ActorsEntity actorsEntity)
+            addEntity(actorsEntity.getEntity());
+    }
+
+    public void removeActorAndEntity(Actor actor) {
+        removeActor(actor);
+        if (actor instanceof ActorsEntity actorsEntity)
+            removeEntity(actorsEntity.getEntity());
     }
 }

@@ -7,10 +7,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Align;
+import com.formiko.fragmentsoftheabyss.model.entity.Entity;
 import com.formiko.fragmentsoftheabyss.model.entity.Monster;
 import com.formiko.fragmentsoftheabyss.utils.TextureGenerator;
+import com.formiko.fragmentsoftheabyss.view.interfaceModel.ActorsEntity;
 
-public class MonsterActor extends Actor {
+public class MonsterActor extends Actor implements ActorsEntity {
     private final Texture monsterTexture;
     private final Monster monster;
     private final ShapeRenderer shapeRenderer;
@@ -70,7 +72,8 @@ public class MonsterActor extends Actor {
         batch.begin();
     }
 
-    public Object getMonster() {
-        return this.monster;
+    @Override
+    public Entity getEntity() {
+        return monster;
     }
 }

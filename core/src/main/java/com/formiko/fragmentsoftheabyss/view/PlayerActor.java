@@ -7,10 +7,13 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Align;
+import com.formiko.fragmentsoftheabyss.Main;
+import com.formiko.fragmentsoftheabyss.model.entity.Entity;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
 import com.formiko.fragmentsoftheabyss.utils.TextureGenerator;
+import com.formiko.fragmentsoftheabyss.view.interfaceModel.ActorsEntity;
 
-public class PlayerActor extends Actor {
+public class PlayerActor extends Actor implements ActorsEntity {
     private final Texture playerTexture;
     private final Player player;
     private final ShapeRenderer shapeRenderer;
@@ -27,14 +30,14 @@ public class PlayerActor extends Actor {
         super.act(delta);
         setX(player.getX());
         setY(player.getY());
-        GameScreen.getCamera().position.set(getX(), getY(), 0);
+        if(!Main.isEditor){
+            GameScreen.getCamera().position.set(getX(), getY(), 0);
+        }
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        //batch.draw(playerTexture, getX(), getY(), getWidth(), getHeight());
-        batch.draw(playerTexture, getX()*getScaleX(), getY()*getScaleY(), getWidth()*getScaleX(), getHeight()*getScaleY());
-
+        batch.draw(playerTexture, player.getX(), player.getY(), getWidth()*getScaleX(), getHeight()*getScaleY());
         float healPercentage = (float) player.getHealth() / player.getMaxHealth();
 
         float barWidth = 100 * getScaleX();
@@ -63,5 +66,10 @@ public class PlayerActor extends Actor {
         // shapeRenderer.rect(getX()*getScaleX(), getY()*getScaleY(), getWidth()*getScaleX(), getHeight()*getScaleY());
         // shapeRenderer.end();
         batch.begin();
+    }
+
+    @Override
+    public Entity getEntity() {
+        return player;
     }
 }

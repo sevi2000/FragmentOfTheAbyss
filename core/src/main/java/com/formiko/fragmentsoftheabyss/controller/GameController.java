@@ -12,14 +12,12 @@ import com.formiko.fragmentsoftheabyss.model.entity.Monster;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 import com.formiko.fragmentsoftheabyss.view.FieldActor;
-import com.formiko.fragmentsoftheabyss.view.LabelActor;
 import com.formiko.fragmentsoftheabyss.view.MonsterActor;
 
 public class GameController extends InputAdapter {
     private final Player player;
     public FieldActor actor;
     public static int FIELD_SIZE = 1000;
-    public LabelActor labelActor;
 
     public GameController(Player player, FieldActor actor) {
         this.player = player;
@@ -28,12 +26,17 @@ public class GameController extends InputAdapter {
     }
 
     public Optional<Boolean> kayPress() {
+        //System.out.println(actor.getField().getListEntityOnField().stream().filter(e -> e instanceof Player ).count());
+        //System.out.println(player.getHealth());
+
         if (player.getHealth() <= 0) {
+            System.out.println("MORT ############################## ");
             return Optional.of(false);
-            
         }
+
         if (Gdx.input.isKeyPressed(Input.Keys.W) ||
                 Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            System.out.println("MOVE UP "+  player.getX() + " " + player.getY());
             player.move(0, 1);
             if (checkCollisionWithBox(player).isPresent()) {
                 player.move(0, -1);
@@ -76,7 +79,7 @@ public class GameController extends InputAdapter {
                 if (monster.getHealth() <= 0) {
                 Actor monsterActor  = List.of(actor.getChildren()
                 .toArray())
-                .stream().filter(e -> e instanceof MonsterActor).map(e -> (MonsterActor) e).filter(e -> e.getMonster().equals(monster)).findFirst().orElse(null);
+                .stream().filter(e -> e instanceof MonsterActor).map(e -> (MonsterActor) e).filter(e -> e.getEntity().equals(monster)).findFirst().orElse(null);
                 if (monsterActor != null) {
                     actor.getField().removeEntity(monster);
                     actor.removeActor(monsterActor);
@@ -97,29 +100,6 @@ public class GameController extends InputAdapter {
         return Optional.empty();
     }
 
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        player.setX(screenX);
-        player.setY(screenY);
-        return super.touchDown(screenX, screenY, pointer, button);
-    }
-
-    private void moveToPosition(Entity item, float deltaX, float deltaY) {
-        if (Math.abs(deltaX) > Math.abs(deltaY)) {
-            if (deltaX > 0) {
-                item.move(1, 0);
-            } else {
-                item.move(-1, 0);
-            }
-        } else {
-            if (deltaY > 0) {
-                item.move(0, 1);
-            } else {
-                item.move(0, -1);
-            }
-        }
-    }
-    
     public void animatMonster() {
         for (Entity monster : actor.getField().getListEntityOnField()) {
             if (monster.getId() == EntityType.MONSTER && monster.canSee(player)) {
@@ -141,8 +121,10 @@ public class GameController extends InputAdapter {
         return Optional.empty();
     }
     public Optional<Entity> checkCollisionWithBox(Entity current) {
+
         for (Entity item : actor.getField().getBoxEntity()) {
             if (current != item && current.collidesWith(item)) {
+                System.out.println("collision ?");
                 return Optional.of(item);
             }
         }
@@ -157,13 +139,5 @@ public class GameController extends InputAdapter {
         }
         return Optional.empty();
     }
-    public boolean isColliding(Entity current) {
-        return checkCollisionWithBox(current).isPresent();
-    }
-    public boolean canMoveThere(Entity current) {
-        if(isColliding(current)){
-            return false;
-        }
-        return current.getX() >= 0 && current.getY() >= 0 && current.getWidth() < FIELD_SIZE && current.getHeight() < FIELD_SIZE;
-    }
+
 }

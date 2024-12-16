@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.formiko.fragmentsoftheabyss.Main;
 import com.formiko.fragmentsoftheabyss.model.Field;
 import lombok.Getter;
 
@@ -27,11 +28,16 @@ public class GameScreen implements Screen {
         instance = this;
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
-        // Make the camera zoom *2 over the level
-        // camera.setToOrtho(false, 1000, 1000);
-        camera.zoom = 0.5f * (1080f / Gdx.graphics.getHeight());
         viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
-        stage = new Stage(viewport, batch);
+
+        if (Main.isEditor){
+            stage = new Stage();
+        }else{
+            camera.zoom = 0.5f * (1080f / Gdx.graphics.getHeight());
+            stage = new Stage(viewport, batch);
+        }
+
+
         fieldActor = new FieldActor(Field.fromFile("levels/level" + level + ".json"));
         fieldActor.setSize(1000, 1000);
         fieldActor.setPosition(0, 0);
@@ -62,15 +68,14 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0f, 0f, 0f, 1f);
-        batch.setProjectionMatrix(camera.combined);
+       // batch.setProjectionMatrix(camera.combined);
         stage.act(delta);
         stage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height, true);
-
+            viewport.update(width, height, true);
     }
 
     @Override
