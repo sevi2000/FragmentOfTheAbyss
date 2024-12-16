@@ -13,7 +13,8 @@
         "experience": 50,
         "gold": 50,
         "attack": 15,
-        "defense": 8
+        "defense": 8,
+        "hitRadius": 100
     },
     "width": 1200,
     "height": 1200,
@@ -50,7 +51,8 @@
             "speed": 2,
             "width": 50.0,
             "height": 60.0,
-            "attack": 3
+            "attack": 3,
+            "hitRadius": 50
         },
         {
             "type":"DOOR",

@@ -21,15 +21,17 @@ public class Player extends Entity{
     private final int gold;
     private final int attack;
     private final int defense;
+    private final int hitRadius;
 
     @Builder
-    public Player(EntityType id, int health, float x, float y, int maxHealth, int speed, String name, int experience, int gold, int attack, int defense, float width, float height) {
+    public Player(EntityType id, int health, float x, float y, int maxHealth, int speed, String name, int experience, int gold, int attack, int defense, float width, float height, int hitRadius) {
         super(id, health, x, y, maxHealth, speed,width,height);
         this.experience = experience;
         this.gold = gold;
         this.attack = attack;
         this.defense = defense;
         this.name = name;
+        this.hitRadius = hitRadius;
     }
     public Player(){
         super(EntityType.PLAYER,0,0,0,0,0,0,0);
@@ -38,6 +40,7 @@ public class Player extends Entity{
         this.attack = 0;
         this.defense = 0;
         this.name = "";
+        this.hitRadius = 0;
     }
 
     public void damage(int damage){
