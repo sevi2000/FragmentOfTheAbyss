@@ -9,11 +9,13 @@ import lombok.Getter;
 public class Monster extends Entity {
 
     private int attack;
+    private int hitRadius;
     
     @Builder
-    public Monster(int health, float x, float y, int maxHealth, int speed, float width, float height, int attack) {
+    public Monster(int health, float x, float y, int maxHealth, int speed, float width, float height, int attack, int hitRadius) {
         super(EntityType.MONSTER, health, x, y, maxHealth, speed, width, height);
         this.attack = attack;
+        this.hitRadius = hitRadius;
     }
     
     public Monster() {

@@ -30,6 +30,7 @@ public class Field {
       .maxHealth(100)
       .width(50)
       .height(50)
+      .hitRadius(100)
       .build();
       Door door = Door.builder().x(200).y(200).width(100).height(100).build();
       listEntityOnField.add(door);
@@ -69,8 +70,8 @@ public class Field {
    public List<Entity> getBoxEntity() {
       return listEntityOnField.stream().filter(e -> e.getId() == EntityType.BOX).toList();
    }
-   public List<Entity> getMonsterEntity() {
-      return listEntityOnField.stream().filter(e -> e.getId() == EntityType.MONSTER).toList();
+   public List<Monster> getMonsterEntity() {
+      return listEntityOnField.stream().filter(e -> e.getId() == EntityType.MONSTER).map( e -> (Monster)e).toList();
    }
    public boolean isThereMonster() {
       return listEntityOnField.stream().anyMatch(e -> e.getId() == EntityType.MONSTER);

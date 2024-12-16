@@ -49,7 +49,7 @@ public abstract class Entity {
         this.width = width;
         this.height = height;
         this.path = List.of();
-        seeRadius = 400;
+        this.seeRadius = 400;
     }
 
     public void move(float deltaX, float deltaY) {

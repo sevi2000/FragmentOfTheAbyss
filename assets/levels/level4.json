@@ -13,7 +13,8 @@
         "experience": 50,
         "gold": 50,
         "attack": 15,
-        "defense": 8
+        "defense": 8,
+        "hitRadius": 100
     },
     "width": 1200,
     "height": 1200,
@@ -61,7 +62,8 @@
             "speed": 3,
             "width": 60.0,
             "height": 80.0,
-            "attack": 10
+            "attack": 10,
+            "hitRadius": 50
         },
         {
             "type": "MONSTER",
@@ -73,7 +75,8 @@
             "speed": 3,
             "width": 60.0,
             "height": 80.0,
-            "attack": 10
+            "attack": 10,
+            "hitRadius": 50
         },
         {
             "type": "MONSTER",
@@ -85,7 +88,8 @@
             "speed": 3,
             "width": 60.0,
             "height": 80.0,
-            "attack": 10
+            "attack": 10,
+            "hitRadius": 50
         },
         {
             "type": "MONSTER",
@@ -97,7 +101,8 @@
             "speed": 3,
             "width": 60.0,
             "height": 80.0,
-            "attack": 10
+            "attack": 10,
+            "hitRadius": 50
         },
         {
             "type": "MONSTER",
@@ -109,7 +114,8 @@
             "speed": 3,
             "width": 60.0,
             "height": 80.0,
-            "attack": 10
+            "attack": 10,
+            "hitRadius": 50
         },
         {
             "type":"DOOR",
