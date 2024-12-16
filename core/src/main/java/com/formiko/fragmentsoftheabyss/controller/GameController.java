@@ -6,17 +6,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.formiko.fragmentsoftheabyss.model.entity.Door;
 import com.formiko.fragmentsoftheabyss.model.entity.Entity;
 import com.formiko.fragmentsoftheabyss.model.entity.Monster;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 import com.formiko.fragmentsoftheabyss.view.FieldActor;
+import com.formiko.fragmentsoftheabyss.view.LabelActor;
 import com.formiko.fragmentsoftheabyss.view.MonsterActor;
 
 public class GameController extends InputAdapter {
     private final Player player;
     public FieldActor actor;
     public static int FIELD_SIZE = 1000;
+    public LabelActor labelActor;
 
     public GameController(Player player, FieldActor actor) {
         this.player = player;
@@ -24,9 +27,11 @@ public class GameController extends InputAdapter {
         MusicController.playMainMusic();
     }
 
-    public void kayPress() {
-
-
+    public Optional<Boolean> kayPress() {
+        if (player.getHealth() <= 0) {
+            return Optional.of(false);
+            
+        }
         if (Gdx.input.isKeyPressed(Input.Keys.W) ||
                 Gdx.input.isKeyPressed(Input.Keys.UP)) {
             player.move(0, 1);
@@ -60,7 +65,7 @@ public class GameController extends InputAdapter {
             player.revive(100);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            int radius = 100;
+            int radius = 150;
             Monster monster = actor.getField().getListEntityOnField().stream()
                     .filter(e -> e.getId() == EntityType.MONSTER)
                     .map(e -> (Monster) e)
@@ -87,6 +92,10 @@ public class GameController extends InputAdapter {
     if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
             player.revive(100);
         }
+        if (checkCollisionWithDoor(player).isPresent() && actor.getField().getDoor().isVisible()) {
+            return Optional.of(true);
+        }
+        return Optional.empty();
     }
 
     @Override
@@ -136,6 +145,15 @@ public class GameController extends InputAdapter {
         for (Entity item : actor.getField().getBoxEntity()) {
             if (current != item && current.collidesWith(item)) {
                 return Optional.of(item);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public Optional <Door> checkCollisionWithDoor(Entity current) {
+        for (Entity item : actor.getField().getListEntityOnField()) {
+            if (item instanceof Door && current.collidesWith(item)) {
+                return Optional.of((Door) item);
             }
         }
         return Optional.empty();

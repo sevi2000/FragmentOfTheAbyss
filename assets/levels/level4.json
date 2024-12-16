@@ -86,6 +86,41 @@
             "width": 60.0,
             "height": 80.0,
             "attack": 10
+        },
+        {
+            "type": "MONSTER",
+            "id": "MONSTER",
+            "health": 300,
+            "x": 800.0,
+            "y": 800.0,
+            "maxHealth": 300,
+            "speed": 3,
+            "width": 60.0,
+            "height": 80.0,
+            "attack": 10
+        },
+        {
+            "type": "MONSTER",
+            "id": "MONSTER",
+            "health": 300,
+            "x": 800.0,
+            "y": 700.0,
+            "maxHealth": 300,
+            "speed": 3,
+            "width": 60.0,
+            "height": 80.0,
+            "attack": 10
+        },
+        {
+            "type":"DOOR",
+            "id":"DOOR",
+            "health":0,
+            "x":200.0,
+            "y":200.0,
+            "maxHealth":0,
+            "speed":0,
+            "width":100.0,
+            "height":100.0
         }
     ]
 }

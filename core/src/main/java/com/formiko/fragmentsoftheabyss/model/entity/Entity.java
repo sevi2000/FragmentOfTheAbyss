@@ -62,7 +62,7 @@ public abstract class Entity {
         this.y += deltaY * speed;
 
         moveInsideScreenIfNeeded();
-        Gdx.app.log("Entity", "Move of " + deltaX + " " + deltaY + " " + speed + " in "+ Gdx.graphics.getWidth() + " " + Gdx.graphics.getHeight());
+        // Gdx.app.log("Entity", "Move of " + deltaX + " " + deltaY + " " + speed + " in "+ Gdx.graphics.getWidth() + " " + Gdx.graphics.getHeight());
     }
 
     private long lastTimePathCalculate;

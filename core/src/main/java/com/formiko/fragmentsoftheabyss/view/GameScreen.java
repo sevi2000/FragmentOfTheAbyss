@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -19,8 +20,11 @@ public class GameScreen implements Screen {
     private final Stage stage;
     @Getter
     private FieldActor fieldActor;
+    private LabelActor labelActor;
+    public static GameScreen instance;
 
-    public GameScreen(String path) {
+    public GameScreen(int level) {
+        instance = this;
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         // Make the camera zoom *2 over the level
@@ -28,10 +32,16 @@ public class GameScreen implements Screen {
         camera.zoom = 0.5f * (1080f / Gdx.graphics.getHeight());
         viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         stage = new Stage(viewport, batch);
-        fieldActor = new FieldActor(Field.fromFile(path));
+        fieldActor = new FieldActor(Field.fromFile("levels/level" + level + ".json"));
         fieldActor.setSize(1000, 1000);
         fieldActor.setPosition(0, 0);
         addActor(fieldActor);
+
+        if(level == 1) {
+            setText("Level " + level + ". A breach have been open to the abyss,\n kill all the monster to close it. Move with arrows & hit with space.");
+        } else {
+            setText("Level " + level);
+        }
     }
     public int getMinScreenWidthOrHeight() { return Math.min(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); }
     public float zoomLevel() { return getMinScreenWidthOrHeight() / 1000f; }
@@ -78,4 +88,15 @@ public class GameScreen implements Screen {
         // playerUIView.dispose();
     }
 
+    public static void setText(@Null String text){
+        if(instance.labelActor != null) {
+            instance.labelActor.remove();
+        }
+        if(text != null) {
+            instance.labelActor = new LabelActor(text);
+            instance.labelActor.setPosition(0, 0);
+            // labelStage.addActor(labelActor);
+            instance.addActor(instance.labelActor);
+        }
+    }
 }

@@ -53,10 +53,10 @@ public class PlayerActor extends Actor {
         shapeRenderer.setColor(Color.BLACK);
         shapeRenderer.end();
 
-        // Debugging hitbox
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.rect(getX()*getScaleX(), getY()*getScaleY(), getWidth()*getScaleX(), getHeight()*getScaleY());
-        shapeRenderer.end();
+        // // Debugging hitbox
+        // shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        // shapeRenderer.rect(getX()*getScaleX(), getY()*getScaleY(), getWidth()*getScaleX(), getHeight()*getScaleY());
+        // shapeRenderer.end();
         batch.begin();
     }
 }
