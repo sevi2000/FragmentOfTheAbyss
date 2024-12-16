@@ -1,0 +1,106 @@
+{
+    "player": {
+        "type": "PLAYER",
+        "id": "PLAYER",
+        "health": 120,
+        "x": 100.0,
+        "y": 500.0,
+        "maxHealth": 120,
+        "speed": 10,
+        "width": 60.0,
+        "height": 80.0,
+        "name": null,
+        "experience": 25,
+        "gold": 30,
+        "attack": 10,
+        "defense": 5,
+        "hitRadius": 100
+    },
+    "width": 1000,
+    "height": 1000,
+    "listEntityOnField": [
+        {
+            "type": "BOX",
+            "id": "BOX",
+            "health": 100,
+            "x": 200.0,
+            "y": 200.0,
+            "maxHealth": 100,
+            "speed": 0,
+            "width": 50.0,
+            "height": 50.0
+        },
+        {
+            "type": "BOX",
+            "id": "BOX",
+            "health": 100,
+            "x": 600.0,
+            "y": 600.0,
+            "maxHealth": 100,
+            "speed": 0,
+            "width": 50.0,
+            "height": 50.0
+        },
+        {
+            "type": "BOX",
+            "id": "BOX",
+            "health": 100,
+            "x": 400.0,
+            "y": 800.0,
+            "maxHealth": 100,
+            "speed": 0,
+            "width": 50.0,
+            "height": 50.0
+        },
+        {
+            "type": "MONSTER",
+            "id": "MONSTER",
+            "health": 200,
+            "x": 800.0,
+            "y": 200.0,
+            "maxHealth": 200,
+            "speed": 2,
+            "width": 60.0,
+            "height": 80.0,
+            "attack": 5,
+            "hitRadius": 50
+        },
+        {
+            "type": "MONSTER",
+            "id": "MONSTER",
+            "health": 200,
+            "x": 300.0,
+            "y": 700.0,
+            "maxHealth": 200,
+            "speed": 2,
+            "width": 60.0,
+            "height": 80.0,
+            "attack": 5,
+            "hitRadius": 50
+        },
+        {
+            "type": "MONSTER",
+            "id": "MONSTER",
+            "health": 200,
+            "x": 500.0,
+            "y": 500.0,
+            "maxHealth": 200,
+            "speed": 2,
+            "width": 60.0,
+            "height": 80.0,
+            "attack": 5,
+            "hitRadius": 50
+        },
+        {
+            "type":"DOOR",
+            "id":"DOOR",
+            "health":0,
+            "x":200.0,
+            "y":200.0,
+            "maxHealth":0,
+            "speed":0,
+            "width":100.0,
+            "height":100.0
+        }
+    ]
+}

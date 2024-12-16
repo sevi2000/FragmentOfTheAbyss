@@ -1,0 +1,82 @@
+{
+    "player": {
+        "type": "PLAYER",
+        "id": "PLAYER",
+        "health": 100,
+        "x": 300.0,
+        "y": 300.0,
+        "maxHealth": 100,
+        "speed": 10,
+        "width": 60.0,
+        "height": 80.0,
+        "name": null,
+        "experience": 10,
+        "gold": 10,
+        "attack": 7,
+        "defense": 2,
+        "hitRadius": 100
+    },
+    "width": 800,
+    "height": 800,
+    "listEntityOnField": [
+        {
+            "type": "BOX",
+            "id": "BOX",
+            "health": 100,
+            "x": 100.0,
+            "y": 100.0,
+            "maxHealth": 100,
+            "speed": 0,
+            "width": 50.0,
+            "height": 50.0
+        },
+        {
+            "type": "BOX",
+            "id": "BOX",
+            "health": 100,
+            "x": 500.0,
+            "y": 500.0,
+            "maxHealth": 100,
+            "speed": 0,
+            "width": 50.0,
+            "height": 50.0
+        },
+        {
+            "type": "MONSTER",
+            "id": "MONSTER",
+            "health": 150,
+            "x": 500.0,
+            "y": 300.0,
+            "maxHealth": 150,
+            "speed": 1.5,
+            "width": 60.0,
+            "height": 80.0,
+            "attack": 3,
+            "hitRadius": 50
+        },
+        {
+            "type": "MONSTER",
+            "id": "MONSTER",
+            "health": 150,
+            "x": 300.0,
+            "y": 500.0,
+            "maxHealth": 150,
+            "speed": 1.5,
+            "width": 60.0,
+            "height": 80.0,
+            "attack": 3,
+            "hitRadius": 50
+        },
+        {
+            "type":"DOOR",
+            "id":"DOOR",
+            "health":0,
+            "x":200.0,
+            "y":200.0,
+            "maxHealth":0,
+            "speed":0,
+            "width":100.0,
+            "height":100.0
+        }
+    ]
+}
