@@ -79,7 +79,6 @@ jobs:
           name: release-artifacts
           path: |
             core/build/libs/*.jar
-            desktop/build/libs/*.jar
             *.deb
           if-no-files-found: warn
 
@@ -97,5 +96,4 @@ jobs:
           prerelease: false
           artifacts: |
             core/build/libs/*.jar
-            desktop/build/libs/*.jar
             *assembleDist
