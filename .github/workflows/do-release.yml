@@ -36,8 +36,8 @@ jobs:
           JAVA_OPTS: -Xmx2048m
 
       # Step 5: Package the Desktop App as a DEB File
-- name: Create DEB Package
-  run: |
+      - name: Create DEB Package
+        run: |
     # Set up directories
     mkdir -p deb-package/DEBIAN
     mkdir -p deb-package/usr/local/lib/my-libgdx-app
