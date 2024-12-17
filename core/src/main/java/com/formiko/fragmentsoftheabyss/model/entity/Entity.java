@@ -5,10 +5,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.formiko.fragmentsoftheabyss.controller.GameController;
 import com.formiko.fragmentsoftheabyss.model.Coordinates;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 import com.formiko.fragmentsoftheabyss.utils.AStar;
+import com.formiko.fragmentsoftheabyss.utils.Parser;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -135,5 +138,15 @@ public abstract class Entity {
     }
     public boolean canSee(Entity target) {
         return Math.sqrt(Math.pow(target.getCenterX() - getCenterX(), 2) + Math.pow(target.getCenterY() - getCenterY(), 2)) < seeRadius;
+    }
+
+    public String toJson() {
+        try {
+            return Parser.getObjectMapper().writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return "";
     }
 }
