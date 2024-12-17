@@ -38,32 +38,32 @@ jobs:
       # Step 5: Package the Desktop App as a DEB File
       - name: Create DEB Package
         run: |
-          mkdir -p deb-package/usr/local/lib/my-libgdx-app
+          mkdir -p deb-package/usr/local/lib/fragments-of-the-abyss
           mkdir -p deb-package/usr/share/applications
           mkdir -p deb-package/usr/bin
 
           # Copy desktop JAR to the DEB package directory
-          cp desktop/build/libs/*.jar deb-package/usr/local/lib/my-libgdx-app/my-libgdx-app.jar
+          cp desktop/build/libs/*.jar deb-package/usr/local/lib/fragments-of-the-abyss/fragments-of-the-abyss.jar
 
           # Create a launcher script
-          cat <<EOF > deb-package/usr/bin/my-libgdx-app
+          cat <<EOF > deb-package/usr/bin/fragments-of-the-abyss
           #!/bin/bash
-          java -jar /usr/local/lib/my-libgdx-app/my-libgdx-app.jar
+          java -jar /usr/local/lib/fragments-of-the-abyss/fragments-of-the-abyss.jar
           EOF
-          chmod +x deb-package/usr/bin/my-libgdx-app
+          chmod +x deb-package/usr/bin/fragments-of-the-abyss
 
           # Add a .desktop file for applications menu entry
-          cat <<EOF > deb-package/usr/share/applications/my-libgdx-app.desktop
+          cat <<EOF > deb-package/usr/share/applications/fragments-of-the-abyss.desktop
           [Desktop Entry]
           Name=My LibGDX App
-          Exec=my-libgdx-app
+          Exec=fragments-of-the-abyss
           Icon=utilities-terminal
           Type=Application
           Categories=Game;
           EOF
 
           # Build the DEB package
-          dpkg-deb --build deb-package my-libgdx-app.deb
+          dpkg-deb --build deb-package fragments-of-the-abyss.deb
 
       # Step 6: Determine Release Tag (Date-based versioning)
       - name: Determine Release Tag
@@ -80,7 +80,6 @@ jobs:
           path: |
             core/build/libs/*.jar
             desktop/build/libs/*.jar
-            android/build/outputs/apk/debug/*.apk
             *.deb
           if-no-files-found: warn
 
@@ -99,5 +98,4 @@ jobs:
           artifacts: |
             core/build/libs/*.jar
             desktop/build/libs/*.jar
-            android/build/outputs/apk/debug/*.apk
-            *.deb
+            *assembleDist
