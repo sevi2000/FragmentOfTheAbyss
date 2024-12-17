@@ -62,6 +62,18 @@ jobs:
           Categories=Game;
           EOF
 
+          # Add the DEBIAN control file
+          cat <<EOF > deb-package/DEBIAN/control
+          Package: my-libgdx-app
+          Version: 1.0.0
+          Section: games
+          Priority: optional
+          Architecture: all
+          Depends: default-jre
+          Maintainer: Your Name <youremail@example.com>
+          Description: My LibGDX Game Application
+           This is a sample LibGDX desktop application packaged as a DEB file.
+          EOF        
           # Build the DEB package
           dpkg-deb --build deb-package fragments-of-the-abyss.deb
 
