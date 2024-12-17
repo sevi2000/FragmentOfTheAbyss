@@ -41,6 +41,7 @@ jobs:
           mkdir -p deb-package/usr/local/lib/fragments-of-the-abyss
           mkdir -p deb-package/usr/share/applications
           mkdir -p deb-package/usr/bin
+          mkdir -p deb-package/DEBIAN
 
           # Copy desktop JAR to the DEB package directory
           cp core/build/libs/*.jar deb-package/usr/local/lib/fragments-of-the-abyss/fragments-of-the-abyss.jar
