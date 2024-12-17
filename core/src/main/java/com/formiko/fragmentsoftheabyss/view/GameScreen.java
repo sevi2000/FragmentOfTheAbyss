@@ -33,7 +33,7 @@ public class GameScreen implements Screen {
         if (Main.isEditor){
             stage = new Stage();
         }else{
-            camera.zoom = 0.7f * (1080f / Gdx.graphics.getHeight());
+            //camera.zoom = 0.9f * (1080f / Gdx.graphics.getHeight());
             stage = new Stage(viewport, batch);
         }
 

@@ -12,6 +12,7 @@ import com.formiko.fragmentsoftheabyss.model.entity.Box;
 import com.formiko.fragmentsoftheabyss.model.entity.Door;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
 import com.formiko.fragmentsoftheabyss.model.entity.Entity;
+import com.formiko.fragmentsoftheabyss.model.entity.Item;
 import com.formiko.fragmentsoftheabyss.model.entity.Monster;
 import com.formiko.fragmentsoftheabyss.model.Field;
 import com.formiko.fragmentsoftheabyss.utils.TextureGenerator;
@@ -64,6 +65,11 @@ public class FieldActor extends Group {
                 monsterActor.setSize(monster.getWidth(), monster.getHeight());
                 addActor(monsterActor);
                  
+            } else if (entity instanceof Item item) {
+                ItemActor itemActor = new ItemActor(item);
+                itemActor.setSize(item.getWidth(), item.getHeight());
+                addActor(itemActor);
+
             } else if (entity instanceof Door && ((Door) entity).isVisible()) {
                 Door door = (Door) entity;
                 DoorActor doorActor = new DoorActor(door);

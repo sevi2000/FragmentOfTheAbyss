@@ -49,7 +49,7 @@ public class Main extends Game {
             Optional<Boolean> nextLevel = gameController.kayPress();
             gameController.animatMonster();
             if (nextLevel.isPresent() && nextLevel.get()) {
-                if (level > maxLevel) {
+                if (level >= maxLevel) {
                     GameScreen.setText("The abyss is closed. You win !");
                 } else {
                     level++;
