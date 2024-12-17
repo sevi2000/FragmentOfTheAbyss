@@ -43,7 +43,7 @@ jobs:
           mkdir -p deb-package/usr/bin
 
           # Copy desktop JAR to the DEB package directory
-          cp desktop/build/libs/*.jar deb-package/usr/local/lib/fragments-of-the-abyss/fragments-of-the-abyss.jar
+          cp core/build/libs/*.jar deb-package/usr/local/lib/fragments-of-the-abyss/fragments-of-the-abyss.jar
 
           # Create a launcher script
           cat <<EOF > deb-package/usr/bin/fragments-of-the-abyss
