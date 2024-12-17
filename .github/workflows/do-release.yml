@@ -1,0 +1,103 @@
+name: Publish Release for LibGDX Project
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Build and Publish Release
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Java Development Kit (JDK)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # Step 3: Grant Execute Permissions to Gradle Wrapper
+      - name: Make Gradle Wrapper Executable
+        run: chmod +x ./gradlew
+
+      # Step 4: Build the Project
+      - name: Build with Gradle
+        run: ./gradlew clean assembleDist
+        env:
+          JAVA_OPTS: -Xmx2048m
+
+      # Step 5: Package the Desktop App as a DEB File
+      - name: Create DEB Package
+        run: |
+          mkdir -p deb-package/usr/local/lib/my-libgdx-app
+          mkdir -p deb-package/usr/share/applications
+          mkdir -p deb-package/usr/bin
+
+          # Copy desktop JAR to the DEB package directory
+          cp desktop/build/libs/*.jar deb-package/usr/local/lib/my-libgdx-app/my-libgdx-app.jar
+
+          # Create a launcher script
+          cat <<EOF > deb-package/usr/bin/my-libgdx-app
+          #!/bin/bash
+          java -jar /usr/local/lib/my-libgdx-app/my-libgdx-app.jar
+          EOF
+          chmod +x deb-package/usr/bin/my-libgdx-app
+
+          # Add a .desktop file for applications menu entry
+          cat <<EOF > deb-package/usr/share/applications/my-libgdx-app.desktop
+          [Desktop Entry]
+          Name=My LibGDX App
+          Exec=my-libgdx-app
+          Icon=utilities-terminal
+          Type=Application
+          Categories=Game;
+          EOF
+
+          # Build the DEB package
+          dpkg-deb --build deb-package my-libgdx-app.deb
+
+      # Step 6: Determine Release Tag (Date-based versioning)
+      - name: Determine Release Tag
+        id: tag
+        run: |
+          TAG_NAME="v$(date +'%Y.%m.%d.%H%M')"
+          echo "release_tag=$TAG_NAME" >> $GITHUB_ENV
+
+      # Step 7: Upload Build Artifacts (JARs, APKs, DEB)
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-artifacts
+          path: |
+            core/build/libs/*.jar
+            desktop/build/libs/*.jar
+            android/build/outputs/apk/debug/*.apk
+            *.deb
+          if-no-files-found: warn
+
+      # Step 8: Create GitHub Release with Artifacts
+      - name: Create GitHub Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ env.release_tag }}
+          name: Release ${{ env.release_tag }}
+          body: |
+            ### Release Notes
+            - This release was automatically generated when code was merged into the main branch.
+            - Includes JARs, APKs, and a DEB package.
+          draft: false
+          prerelease: false
+          artifacts: |
+            core/build/libs/*.jar
+            desktop/build/libs/*.jar
+            android/build/outputs/apk/debug/*.apk
+            *.deb
