@@ -11,8 +11,8 @@ public class Box extends Entity{
     private static final String WALL = "Wall";
 
     @Builder
-    public Box(float x, float y, int maxHealth, float width, float height) {
-        super(EntityType.BOX, 0, x, y, maxHealth, 0,width,height);
+    public Box(float x, float y) {
+        super(EntityType.BOX, 0, x, y, 0, 0,190,190);
 
     }
     public Box(){super(EntityType.BOX,0,0,0,0,0,0,0);}
@@ -32,9 +32,6 @@ public class Box extends Entity{
             Box box = Box.builder()
                     .x(Integer.parseInt(matcher.group(4)))
                     .y(Integer.parseInt(matcher.group(5)))
-                    .maxHealth(100)
-                    .width(Integer.parseInt(matcher.group(2)))
-                    .height(Integer.parseInt(matcher.group(3)))
                 .build();
             return box;
         } else {

@@ -3,31 +3,29 @@ package com.formiko.fragmentsoftheabyss.view;
 import java.io.File;
 import java.util.ArrayList;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.formiko.fragmentsoftheabyss.model.entity.Box;
 import com.formiko.fragmentsoftheabyss.model.entity.Door;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
 import com.formiko.fragmentsoftheabyss.model.entity.Entity;
 import com.formiko.fragmentsoftheabyss.model.entity.Monster;
-import com.formiko.fragmentsoftheabyss.utils.Parser;
 import com.formiko.fragmentsoftheabyss.model.Field;
+import com.formiko.fragmentsoftheabyss.utils.TextureGenerator;
 import com.formiko.fragmentsoftheabyss.view.interfaceModel.ActorsEntity;
 import lombok.Getter;
 
 @Getter
 public class FieldActor extends Group {
 
-    private final Texture mapTexture = new Texture("textures/texture.jpg");
+    private final Texture mapTexture;
     private final Field field;
 
     public FieldActor(Field field) {
+        this.mapTexture = TextureGenerator.getTexture(TextureGenerator.TextureType.MAP);
         this.field = field;
         addActors();
     }

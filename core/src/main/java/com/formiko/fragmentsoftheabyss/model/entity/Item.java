@@ -3,6 +3,8 @@ package com.formiko.fragmentsoftheabyss.model.entity;
 
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 import com.formiko.fragmentsoftheabyss.model.enumGame.ItemType;
+import lombok.Builder;
+import lombok.Getter;
 
 import java.util.Random;
 import java.util.concurrent.Executors;
@@ -11,12 +13,16 @@ import java.util.concurrent.TimeUnit;
 
 public class Item extends Entity {
 
-    private final ItemType type;
+    @Getter
+    private ItemType type;
 
-    public Item(EntityType id, int health, float x, float y, int maxHealth, ItemType type) {
-        super(id, health, x, y, maxHealth, 0,30,30);
+    @Builder
+    public Item(float x, float y, ItemType type) {
+        super(EntityType.ITEM, 0, x, y, 0, 0,112,150);
         this.type = type;
     }
+    public Item() {super(EntityType.ITEM, 0, 0, 0, 0, 0, 0, 0);}
+
 
     @Override
     public boolean collidesWith(Entity entity) {

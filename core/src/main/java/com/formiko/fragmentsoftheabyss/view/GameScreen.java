@@ -33,13 +33,13 @@ public class GameScreen implements Screen {
         if (Main.isEditor){
             stage = new Stage();
         }else{
-            camera.zoom = 0.5f * (1080f / Gdx.graphics.getHeight());
+            camera.zoom = 0.7f * (1080f / Gdx.graphics.getHeight());
             stage = new Stage(viewport, batch);
         }
 
 
         fieldActor = new FieldActor(Field.fromFile("levels/level" + level + ".json"));
-        fieldActor.setSize(1000, 1000);
+        fieldActor.setSize(1500, 1500);
         fieldActor.setPosition(0, 0);
         addActor(fieldActor);
 

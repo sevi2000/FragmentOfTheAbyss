@@ -22,8 +22,8 @@ public class Player extends Entity{
     private final int hitRadius;
 
     @Builder
-    public Player(int health, float x, float y, int maxHealth, int speed, String name, int experience, int gold, int attack, int defense, float width, float height, int hitRadius) {
-        super(EntityType.PLAYER, health, x, y, maxHealth, speed,width,height);
+    public Player(int health, float x, float y, int maxHealth, int speed, String name, int experience, int gold, int attack, int defense, int hitRadius) {
+        super(EntityType.PLAYER, health, x, y, maxHealth, speed,150,200);
         this.experience = experience;
         this.gold = gold;
         this.attack = attack;

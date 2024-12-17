@@ -22,10 +22,12 @@ import lombok.Setter;
     property = "type"
 )
 @JsonSubTypes({
-    @JsonSubTypes.Type(value = Box.class, name = "BOX"),
-    @JsonSubTypes.Type(value = Player.class, name = "PLAYER"),
-    @JsonSubTypes.Type(value = Monster.class, name = "MONSTER"),
-    @JsonSubTypes.Type(value = Door.class, name = "DOOR")
+        @JsonSubTypes.Type(value = Box.class, name = "BOX"),
+        @JsonSubTypes.Type(value = Player.class, name = "PLAYER"),
+        @JsonSubTypes.Type(value = Monster.class, name = "MONSTER"),
+        @JsonSubTypes.Type(value = Door.class, name = "DOOR"),
+        @JsonSubTypes.Type(value = Item.class, name = "ITEM")
+
 })
 @AllArgsConstructor
 @Getter

@@ -12,8 +12,8 @@ public class Monster extends Entity {
     private int hitRadius;
     
     @Builder
-    public Monster(int health, float x, float y, int maxHealth, int speed, float width, float height, int attack, int hitRadius) {
-        super(EntityType.MONSTER, health, x, y, maxHealth, speed, width, height);
+    public Monster(int health, float x, float y, int maxHealth, int speed, int attack, int hitRadius) {
+        super(EntityType.MONSTER, health, x, y, maxHealth, speed, 150, 200);
         this.attack = attack;
         this.hitRadius = hitRadius;
     }

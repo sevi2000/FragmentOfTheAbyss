@@ -20,7 +20,8 @@ public class Main extends Game {
     private static GameScreen gameScreen;
     public static ShapeRenderer shapeRenderer;
 
-    private int level = 1;
+    public static int level = 1;
+    public static int maxLevel = 4;
     public static boolean isEditor = false;
 
     @Override
@@ -48,7 +49,7 @@ public class Main extends Game {
             Optional<Boolean> nextLevel = gameController.kayPress();
             gameController.animatMonster();
             if (nextLevel.isPresent() && nextLevel.get()) {
-                if (level > 4) {
+                if (level > maxLevel) {
                     GameScreen.setText("The abyss is closed. You win !");
                 } else {
                     level++;
