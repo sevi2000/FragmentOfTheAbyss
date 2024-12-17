@@ -27,14 +27,12 @@ public class Main extends Game {
     public void create() {
         shapeRenderer = new ShapeRenderer();
         gameScreen = new GameScreen(level);
-
         Field field = gameScreen.getFieldActor().getField();
-        if(field.getPlayer().isPresent()) player = field.getPlayer().get();
-
+        if(field.getPlayer().isPresent()) {
+            player = field.getPlayer().get();
+        }
         setScreen(gameScreen);
-
         gameController = new GameController(player, gameScreen.getFieldActor());
-
         if(isEditor) {
             editorController = new EditorController(gameScreen.getFieldActor());
             Gdx.input.setInputProcessor(editorController);
