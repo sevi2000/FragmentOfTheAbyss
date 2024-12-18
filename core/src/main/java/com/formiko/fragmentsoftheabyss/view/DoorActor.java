@@ -10,29 +10,12 @@ import com.formiko.fragmentsoftheabyss.model.entity.Entity;
 import com.formiko.fragmentsoftheabyss.utils.TextureGenerator;
 import com.formiko.fragmentsoftheabyss.view.interfaceModel.ActorsEntity;
 
-public class DoorActor extends Actor implements ActorsEntity {
-    private final Texture texture;
-    private final SpriteBatch batch;
-    private final Door door;
+public class DoorActor extends EntityActor{
+    
 
     public DoorActor(Door door) {
-        this.texture = TextureGenerator.getTexture(TextureGenerator.TextureType.DOOR);
-        this.batch = new SpriteBatch();
-        setBounds(door.getX(), door.getY(), door.getWidth(), door.getHeight());
-        this.door = door;
+        super(door);
     }
     
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-         batch.draw(texture, getX()*getScaleX(), getY()*getScaleY(), getWidth()*getScaleX(), getHeight()*getScaleY());
-    }
-    public void dispose(){
-        texture.dispose();
-        batch.dispose();
-    }
-
-    @Override
-    public Entity getEntity() {
-        return door;
-    }
+    
 }
