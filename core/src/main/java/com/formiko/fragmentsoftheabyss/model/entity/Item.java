@@ -4,7 +4,6 @@ package com.formiko.fragmentsoftheabyss.model.entity;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 import com.formiko.fragmentsoftheabyss.model.enumGame.ItemType;
 import lombok.Builder;
-import lombok.Getter;
 
 import java.util.Random;
 import java.util.concurrent.Executors;
@@ -13,13 +12,10 @@ import java.util.concurrent.TimeUnit;
 
 public class Item extends Entity {
 
-    @Getter
-    private ItemType type;
 
     @Builder
-    public Item(float x, float y, ItemType type) {
-        super(EntityType.ITEM, 0, x, y, 0, 0,112,150);
-        this.type = type;
+    public Item(float x, float y, EntityType type) {
+        super(type, 0, x, y, 0, 0,112,150);
     }
     public Item() {super(EntityType.ITEM, 0, 0, 0, 0, 0, 0, 0);}
 
@@ -29,14 +25,13 @@ public class Item extends Entity {
         System.out.println(" POTION COLLISION ");
         if (this.getBounds().overlaps(entity.getBounds())){
             if (entity instanceof Player player){
-                if(type == ItemType.POTION_SPEED){
+                if(id == EntityType.POTION_SPEED){
                     player.setSpeed(30);
                     scheduleItem(30, () -> {
                         player.setSpeed(10);
                         System.out.println("Effet de la potion terminé. Vitesse restaurée : " + player.getSpeed());
                     });
-
-                }else if(type == ItemType.POTION_HEALTH){
+                }else if(id == EntityType.POTION_HEALTH){
                     player.setHealth(player.getHealth()+new Random().nextInt(50));
                 }
                 this.destroy();

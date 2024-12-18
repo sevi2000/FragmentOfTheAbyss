@@ -54,7 +54,7 @@ public class Door extends Entity{
             return false;
         }
 
-        Box box = (Box) o;
+        Door box = (Door) o;
 
         if (Float.compare(box.x, x) != 0) {
             return false;

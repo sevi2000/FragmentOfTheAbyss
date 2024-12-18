@@ -7,6 +7,11 @@ public enum EntityType {
     BOX,
     MONSTER,
     DOOR,
+    POTION_HEALTH,
+    POTION_SPEED,
+    KEY,
+    MAP,
     ITEM
+
 
 }

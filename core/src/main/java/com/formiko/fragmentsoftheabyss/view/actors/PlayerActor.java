@@ -1,35 +1,28 @@
-package com.formiko.fragmentsoftheabyss.view;
+package com.formiko.fragmentsoftheabyss.view.actors;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Align;
 import com.formiko.fragmentsoftheabyss.Main;
-import com.formiko.fragmentsoftheabyss.model.entity.Entity;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
-import com.formiko.fragmentsoftheabyss.utils.TextureGenerator;
-import com.formiko.fragmentsoftheabyss.view.interfaceModel.ActorsEntity;
+import com.formiko.fragmentsoftheabyss.view.GameScreen;
 
-public class PlayerActor extends Actor implements ActorsEntity {
-    private final Texture playerTexture;
-    private final Player player;
+public class PlayerActor extends EntityActor{
+
     private final ShapeRenderer shapeRenderer;
 
     public PlayerActor(Player player) {
-        playerTexture = TextureGenerator.getTexture(TextureGenerator.TextureType.PLAYER);
-        this.player = player;
+        super(player);
         shapeRenderer = new ShapeRenderer();
-        setBounds(player.getX(), player.getY(), player.getWidth(), player.getHeight());
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        setX(player.getX());
-        setY(player.getY());
+        setX(entity.getX());
+        setY(entity.getY());
         if(!Main.isEditor){
             GameScreen.getCamera().position.set(getX(), getY(), 0);
         }
@@ -37,8 +30,8 @@ public class PlayerActor extends Actor implements ActorsEntity {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(playerTexture, player.getX(), player.getY(), getWidth()*getScaleX(), getHeight()*getScaleY());
-        float healPercentage = (float) player.getHealth() / player.getMaxHealth();
+        batch.draw(texture, entity.getX(), entity.getY(), getWidth()*getScaleX(), getHeight()*getScaleY());
+        float healPercentage = (float) entity.getHealth() / entity.getMaxHealth();
 
         float barWidth = 100 * getScaleX();
         float barHeight = 7 * getScaleY();
@@ -57,15 +50,11 @@ public class PlayerActor extends Actor implements ActorsEntity {
         shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.setAutoShapeType(true);
         shapeRenderer.set(ShapeType.Line);
-        shapeRenderer.circle(getX(Align.center), getY(Align.center), player.getHitRadius());
+        shapeRenderer.circle(getX(Align.center), getY(Align.center), ((Player) entity).getHitRadius());
         shapeRenderer.setColor(Color.BLACK);
         shapeRenderer.end();
 
         batch.begin();
     }
 
-    @Override
-    public Entity getEntity() {
-        return player;
-    }
 }

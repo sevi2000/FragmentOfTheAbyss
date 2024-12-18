@@ -6,8 +6,10 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.formiko.fragmentsoftheabyss.model.entity.*;
+import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 import com.formiko.fragmentsoftheabyss.model.enumGame.ItemType;
 import com.formiko.fragmentsoftheabyss.view.*;
+import com.formiko.fragmentsoftheabyss.view.actors.*;
 import com.formiko.fragmentsoftheabyss.view.interfaceModel.ActorsEntity;
 
 import java.io.File;
@@ -82,9 +84,9 @@ public class EditorController extends InputAdapter {
                 case BOX_RIGHT -> placeBox(BLOC_SIZE, 0);
                 case BOX_LEFT -> placeBox(-BLOC_SIZE, 0);
                 case BOX_TOP -> placeBox(0, 50);
-                case POTION_HEALTH -> this.actor.addActorAndEntity(new ItemActor(Item.builder().x(screenX).y(screenX).type(ItemType.POTION_HEALTH).build()));
-                case POTION_SPEED-> this.actor.addActorAndEntity(new ItemActor(Item.builder().x(screenX).y(screenX).type(ItemType.POTION_SPEED).build()));
-                case KEY -> this.actor.addActorAndEntity(new ItemActor(Item.builder().x(screenX).y(screenX).type(ItemType.KEY).build()));
+                case POTION_HEALTH -> this.actor.addActorAndEntity(new ItemActor(Item.builder().x(screenX).y(screenY).type(EntityType.POTION_HEALTH).build()));
+                case POTION_SPEED-> this.actor.addActorAndEntity(new ItemActor(Item.builder().x(screenX).y(screenY).type(EntityType.POTION_SPEED).build()));
+                case KEY -> this.actor.addActorAndEntity(new ItemActor(Item.builder().x(screenX).y(screenY).type(EntityType.KEY).build()));
 
 
                 default -> {

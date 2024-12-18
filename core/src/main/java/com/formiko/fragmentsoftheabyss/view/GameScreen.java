@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.formiko.fragmentsoftheabyss.Main;
 import com.formiko.fragmentsoftheabyss.model.Field;
+import com.formiko.fragmentsoftheabyss.view.actors.LabelActor;
 import lombok.Getter;
 
 public class GameScreen implements Screen {
@@ -33,10 +34,9 @@ public class GameScreen implements Screen {
         if (Main.isEditor){
             stage = new Stage();
         }else{
-            //camera.zoom = 0.9f * (1080f / Gdx.graphics.getHeight());
+            camera.zoom = 0.9f * (1080f / Gdx.graphics.getHeight());
             stage = new Stage(viewport, batch);
         }
-
 
         fieldActor = new FieldActor(Field.fromFile("levels/level" + level + ".json"));
         fieldActor.setSize(1500, 1500);

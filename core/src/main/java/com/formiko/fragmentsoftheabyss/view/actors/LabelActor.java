@@ -1,4 +1,4 @@
-package com.formiko.fragmentsoftheabyss.view;
+package com.formiko.fragmentsoftheabyss.view.actors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.formiko.fragmentsoftheabyss.Main;
+import com.formiko.fragmentsoftheabyss.view.GameScreen;
 import com.github.tommyettinger.textra.TextraLabel;
 
 public class LabelActor extends Table {

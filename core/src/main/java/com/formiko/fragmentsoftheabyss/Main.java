@@ -61,10 +61,7 @@ public class Main extends Game {
                 create();
             }
         }
-        super.render(); 
-        // gameView.render(player);
-        // boxView.render();
-        // labelStage.draw();
+        super.render();
     }
 
     @Override

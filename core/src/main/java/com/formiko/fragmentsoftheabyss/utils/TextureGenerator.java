@@ -2,33 +2,24 @@ package com.formiko.fragmentsoftheabyss.utils;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.formiko.fragmentsoftheabyss.Main;
+import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 
 import java.util.Map;
 
 public class TextureGenerator {
     private TextureGenerator(){}
-    public enum TextureType {
-        PLAYER,
-        MONSTER,
-        BOX,
-        DOOR,
-        POTION_SPEED,
-        POTION_HEALTH,
-        KEY,
-        MAP
-    }
 
-   public static Map<TextureType, Texture> textures = Map.of(
-           TextureType.PLAYER, new Texture("textures/player.png"),
-           TextureType.MONSTER, new Texture("textures/enemy.png"),
-           TextureType.BOX, new Texture("textures/box.png"),
-           TextureType.POTION_HEALTH, new Texture("textures/potion_life.png"),
-           TextureType.POTION_SPEED, new Texture("textures/potion_speed.png"),
-           TextureType.KEY, new Texture("textures/key.png"),
-           TextureType.DOOR, new Texture("textures/door.png"),
-           TextureType.MAP, new Texture("textures/level" + +Main.level+"_texture.png")
+   public static Map<EntityType, Texture> textures = Map.of(
+           EntityType.PLAYER, new Texture("textures/player.png"),
+           EntityType.MONSTER, new Texture("textures/enemy.png"),
+           EntityType.BOX, new Texture("textures/box.png"),
+           EntityType.POTION_HEALTH, new Texture("textures/potion_life.png"),
+           EntityType.POTION_SPEED, new Texture("textures/potion_speed.png"),
+           EntityType.KEY, new Texture("textures/key.png"),
+           EntityType.DOOR, new Texture("textures/door.png"),
+           EntityType.MAP, new Texture("textures/level" + +Main.level+"_texture.png")
     );
-    public static Texture getTexture(TextureType textureType){
-        return textures.get(textureType);
+    public static Texture getTexture(EntityType entityType){
+        return textures.get(entityType);
     }
 }

@@ -13,6 +13,7 @@ import com.formiko.fragmentsoftheabyss.model.entity.Entity;
 import com.formiko.fragmentsoftheabyss.model.entity.Item;
 import com.formiko.fragmentsoftheabyss.model.entity.Monster;
 import com.formiko.fragmentsoftheabyss.model.Field;
+import com.formiko.fragmentsoftheabyss.view.actors.*;
 import com.formiko.fragmentsoftheabyss.view.interfaceModel.ActorsEntity;
 import lombok.Getter;
 
@@ -35,44 +36,16 @@ public class FieldActor extends Group {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         batch.draw(mapTexture, getX(), getY(), getWidth(), getHeight());
-        //batch.draw(mapTexture, getX() * getScaleX(), getY() * getScaleY(), getWidth() * getScaleX(), getHeight() * getScaleY());
         for (int i = 0; i < getChildren().size; i++) {
             getChildren().get(i).draw(batch, parentAlpha);
         }
     }
 
     public void addActors() {
-        System.out.println("AddActors");
-
         for (Entity entity : field.getListEntityOnField()) {
-            if (entity instanceof Box) {
-                Box box = (Box) entity;
-                BoxActor boxActor = new BoxActor(box);//TODO ajouter OPTIONAL
-                boxActor.setSize(box.getWidth(), box.getHeight());
-                addActor(boxActor);
-            } else if (entity instanceof Player) {
-                Player player = (Player) entity;
-                PlayerActor playerActor = new PlayerActor(player);
-                playerActor.setSize(player.getWidth(), player.getHeight());
-                addActor(playerActor);
-                System.out.println("Ajout d'un nouvelle actor");
-            } else if (entity instanceof Monster) {
-                Monster monster = (Monster) entity;
-                MonsterActor monsterActor = new MonsterActor(monster);
-                monsterActor.setSize(monster.getWidth(), monster.getHeight());
-                addActor(monsterActor);
-
-            } else if (entity instanceof Item item) {
-                ItemActor itemActor = new ItemActor(item);
-                itemActor.setSize(item.getWidth(), item.getHeight());
-                addActor(itemActor);
-
-            } else if (entity instanceof Door && ((Door) entity).isVisible()) {
-                Door door = (Door) entity;
-                DoorActor doorActor = new DoorActor(door);
-                doorActor.setSize(door.getWidth(), door.getHeight());
-                addActor(doorActor);
-            }
+            EntityActor boxActor = new EntityActor(entity);
+            boxActor.setSize(entity.getWidth(), entity.getHeight());
+            addActor(boxActor);
         }
     }
 

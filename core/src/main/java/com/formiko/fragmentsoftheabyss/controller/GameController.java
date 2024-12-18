@@ -12,7 +12,7 @@ import com.formiko.fragmentsoftheabyss.model.entity.Monster;
 import com.formiko.fragmentsoftheabyss.model.entity.Player;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 import com.formiko.fragmentsoftheabyss.view.FieldActor;
-import com.formiko.fragmentsoftheabyss.view.MonsterActor;
+import com.formiko.fragmentsoftheabyss.view.actors.MonsterActor;
 
 public class GameController extends InputAdapter {
     private final Player player;
@@ -26,11 +26,7 @@ public class GameController extends InputAdapter {
     }
 
     public Optional<Boolean> kayPress() {
-        //System.out.println(actor.getField().getListEntityOnField().stream().filter(e -> e instanceof Player ).count());
-        //System.out.println(player.getHealth());
-
         if (player.getHealth() <= 0) {
-            System.out.println("MORT ############################## ");
             return Optional.of(false);
         }
 
