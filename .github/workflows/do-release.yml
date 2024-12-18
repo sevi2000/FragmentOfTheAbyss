@@ -53,6 +53,7 @@ jobs:
         echo "Build and move to root with desired name"
         chmod 777 gradlew
         ./gradlew assembleDist
+        echo $?
         # For liftoff project
         echo "Content of lib directory:"
         ls lwjgl3/build/lib/
