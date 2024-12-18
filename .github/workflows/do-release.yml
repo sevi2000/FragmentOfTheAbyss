@@ -31,7 +31,7 @@ jobs:
     - name: Update version
       shell: pwsh
       run: |
-          echo "$(date)" > version.md
+          "$(date '+%Y-%m-%d-%H-%M-%S')" > version.md
 
     - name: Read version.md
       id: version
