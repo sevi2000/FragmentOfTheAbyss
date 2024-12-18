@@ -30,6 +30,13 @@ public class EntityActor extends Actor implements ActorsEntity {
          batch.draw(texture, getX()*getScaleX(), getY()*getScaleY(), getWidth()*getScaleX(), getHeight()*getScaleY());
     }
 
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        setX(entity.getX());
+        setY(entity.getY());
+    }
+
     public void dispose(){
         texture.dispose();
         batch.dispose();
