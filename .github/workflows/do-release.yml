@@ -56,7 +56,7 @@ jobs:
         # For liftoff project
         echo "Content of lib directory:"
         ls lwjgl3/build/lib/
-        ehc "End of content of lib directory"
+        echo "End of content of lib directory"
         echo "Moving jar artifact"
         mv lwjgl3/build/lib/*.jar ${{ env.ARTIFACT_NAME }}.jar
         # For default libgdx project
