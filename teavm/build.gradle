@@ -37,8 +37,10 @@ tasks.register('buildJavaScript', JavaExec) {
   setClasspath(sourceSets.main.runtimeClasspath)
 }
 build.dependsOn buildJavaScript
+/*
 
 tasks.register("run") {
-  description = "Run the JavaScript application hosted via a local Jetty server at http://localhost:8080/"
-  dependsOn(buildJavaScript, tasks.named("jettyRun"))
+ // description = "Run the JavaScript application hosted via a local Jetty server at http://localhost:8080/"
+  //dependsOn(buildJavaScript, tasks.named("jettyRun"))
 }
+*/

@@ -26,12 +26,13 @@ public class Item extends Entity {
 
     @Override
     public boolean collidesWith(Entity entity) {
+        System.out.println(" POTION COLLISION ");
         if (this.getBounds().overlaps(entity.getBounds())){
             if (entity instanceof Player player){
                 if(type == ItemType.POTION_SPEED){
-                    player.setSpeed(2);
+                    player.setSpeed(30);
                     scheduleItem(30, () -> {
-                        player.setSpeed(1);
+                        player.setSpeed(10);
                         System.out.println("Effet de la potion terminé. Vitesse restaurée : " + player.getSpeed());
                     });
 

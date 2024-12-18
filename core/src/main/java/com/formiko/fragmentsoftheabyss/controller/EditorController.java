@@ -133,16 +133,12 @@ public class EditorController extends InputAdapter {
     public boolean keyDown(int keycode) {
         if (Gdx.input.isKeyPressed(Input.Keys.N)) {
             nextComposant();
-            System.out.println("Current item " + current.name());
             GameScreen.setText("Editor mode - Item use: " + current.name());
         } else if (Gdx.input.isKeyPressed(Input.Keys.P)) {
             previousComposant();
-            System.out.println("Current item " + current.name());
             GameScreen.setText("Editor mode - Item use: " + current.name());
         } else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            System.out.println("Save file");
             GameScreen.setText("Editor mode - Save file at : " + Gdx.files.internal("levels/" + nextLevelToBeCreated()).path());
-            System.out.println(actor.getField().toJson());
             try {
                 Files.writeString(Path.of(Gdx.files.internal("levels/" + nextLevelToBeCreated()).path()), actor.getField().toJson());
             } catch (IOException e) {
@@ -151,7 +147,6 @@ public class EditorController extends InputAdapter {
 
         } else if (Gdx.input.isKeyPressed(Input.Keys.U)) {
             if (actor.getChildren().size > 0) {
-                System.out.println("Undo");
                 GameScreen.setText("Editor mode - Action undo ");
                 actor.removeActorAndEntity(actor.getChildren().get(actor.getChildren().size - 1));
             }
