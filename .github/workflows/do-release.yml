@@ -28,7 +28,10 @@ jobs:
       with:
         distribution: ${{ env.JAVA_DISTRIBUTION }}
         java-version: ${{ env.JAVA_VERSION }}
-
+    - name: Update version
+      shell: pwsh
+      run: |
+          echo "$(date)" > version.md
     - name: Read version.md
       id: version
       uses: juliangruber/read-file-action@v1
