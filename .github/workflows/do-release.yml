@@ -52,7 +52,7 @@ jobs:
         }
         echo "Build and move to root with desired name"
         chmod 777 gradlew
-        ./gradlew assembleDist'
+        ./gradlew assembleDist
         # For liftoff project
         mv lwjgl3/build/lib/*.jar ${{ env.ARTIFACT_NAME }}.jar
         # For default libgdx project
