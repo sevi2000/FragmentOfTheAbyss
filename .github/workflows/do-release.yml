@@ -9,7 +9,7 @@ env:
   JAVA_VERSION: '21'
   JAVA_DISTRIBUTION: 'temurin'
   JRE_VERSION: '21.0.1'
-  GITHUB_TOKEN: ${{ github.token }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   ARTIFACT_NAME: 'FragmentOfTheAbyss'
   USER_NAME: 'Releae Bot'
   USER_EMAIL: 'sevidervishi@outlook.fr'
