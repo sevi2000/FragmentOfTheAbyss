@@ -32,6 +32,7 @@ jobs:
       shell: pwsh
       run: |
           echo "$(date)" > version.md
+
     - name: Read version.md
       id: version
       uses: juliangruber/read-file-action@v1
