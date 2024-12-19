@@ -40,7 +40,7 @@ jobs:
         path: version.md
 
     - name: create release
-      shell: bash
+      shell: pwsh
       run: |
         echo "Move version.md to resources and create CHANGELOG.md if not exist"
         if (!(Test-Path "src/main/resources")) {
