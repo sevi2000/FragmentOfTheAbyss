@@ -29,7 +29,7 @@ jobs:
         distribution: ${{ env.JAVA_DISTRIBUTION }}
         java-version: ${{ env.JAVA_VERSION }}
     - name: Update version
-      shell: pwsh
+      shell: bash
       run: |
           echo -n "$(date '+%Y-%m-%d-%H-%M-%S')" > version.md
 
