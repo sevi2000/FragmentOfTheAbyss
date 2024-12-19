@@ -56,7 +56,7 @@ jobs:
         echo $?
         # For liftoff project
         echo "Content of lib directory:"
-        ls -R .
+        ls lwjgl3/build/lib
         echo "End of content of lib directory"
         echo "Moving jar artifact"
         mv lwjgl3/build/lib/*.jar ${{ env.ARTIFACT_NAME }}.jar
