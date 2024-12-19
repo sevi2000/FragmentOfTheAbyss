@@ -11,7 +11,7 @@ env:
   JRE_VERSION: '21.0.1'
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   ARTIFACT_NAME: 'FragmentOfTheAbyss'
-  USER_NAME: 'Releae Bot'
+  USER_NAME: 'sevi2000'
   USER_EMAIL: 'sevidervishi@outlook.fr'
   UUID: 'e1caab6b-1230-4691-a880-dd2d0b8ebb98'
 
