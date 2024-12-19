@@ -43,13 +43,18 @@ public class FieldActor extends Group {
 
     public void addActors() {
         for (Entity entity : field.getListEntityOnField()) {
-            EntityActor boxActor = new EntityActor(entity);
-            boxActor.setSize(entity.getWidth(), entity.getHeight());
-            addActor(boxActor);
+            if (entity instanceof Door door) {
+                addDoor(door);                
+            } else{
+                EntityActor entityActor = new EntityActor(entity);
+                entityActor.setSize(entity.getWidth(), entity.getHeight());
+                addActor(entityActor);
+            }
         }
     }
 
     public void addDoor(Door door) {
+        if (!door.isVisible()) return;
         DoorActor doorActor = new DoorActor(door);
         doorActor.setSize(door.getWidth(), door.getHeight());
         addActorAt(0, doorActor);
