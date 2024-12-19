@@ -30,7 +30,7 @@ public class PlayerActor extends EntityActor{
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(texture, entity.getX(), entity.getY(), getWidth()*getScaleX(), getHeight()*getScaleY());
+        super.draw(batch, parentAlpha);
         float healPercentage = (float) entity.getHealth() / entity.getMaxHealth();
 
         float barWidth = 100 * getScaleX();
@@ -39,6 +39,7 @@ public class PlayerActor extends EntityActor{
         float y = getY(Align.top);
 
         batch.end();
+        System.out.println("PlayerActor.draw");
         shapeRenderer.setProjectionMatrix(GameScreen.getCamera().combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.RED);
