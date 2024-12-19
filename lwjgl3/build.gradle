@@ -136,3 +136,11 @@ startScripts.classpath = project.tasks.jar.outputs.files
 if(enableGraalNative == 'true') {
   apply from: file("nativeimage.gradle")
 }
+tasks.register("printJarPath") {
+       def jarTask = tasks.named("jar").get()
+       def jarName = jarTask.archiveFile.get().asFile
+       def logFile = file("./jar-info.txt")
+        
+        logFile.text = "${jarName.absolutePath}"
+        println "Logged JAR name to: ${jarName.absolutePath}"
+}
