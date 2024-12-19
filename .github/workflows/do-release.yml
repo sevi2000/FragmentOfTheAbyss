@@ -44,7 +44,7 @@ jobs:
       run: |
         echo "Move version.md to resources and create CHANGELOG.md if not exist"
         if (!(Test-Path "src/main/resources")) {
-          mkdir src/main/resources
+          mkdir -p src/main/resources
         }
         cp version.md src/main/resources/
         if (!(Test-Path "CHANGELOG*")) {
