@@ -40,7 +40,7 @@ jobs:
         path: version.md
 
     - name: create release
-      shell: pwsh
+      shell: bash
       run: |
         echo "Move version.md to resources and create CHANGELOG.md if not exist"
         if (!(Test-Path "src/main/resources")) {
@@ -59,7 +59,11 @@ jobs:
         ls lwjgl3/build/libs
         echo "End of content of lib directory"
         echo "Moving jar artifact"
-        mv lwjgl3/build/libs/*.jar ${{ env.ARTIFACT_NAME }}.jar
+        echo "JAR PATH"
+        full_path = ./gradlew printJarPath | Select-String "Logged.*" | ForEach-Object { ($_ -split ":")[1].Trim() }
+        echo $full_path
+        echo "END JAR PATH"
+        mv $full_path ${{ env.ARTIFACT_NAME }}.jar
         # For default libgdx project
         # mv desktop/build/libs/*.jar ${{ env.ARTIFACT_NAME }}.jar
         ls
