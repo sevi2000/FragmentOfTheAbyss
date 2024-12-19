@@ -9,6 +9,8 @@ You move using `w,a,s,d` or arrow keys. You have to kill all monsters of a leve 
 + `./gradlew run` to run
 + `./gradlew assemblDist` to get a Jar file located at ``
 # Contirbutors
-@sevi2000 
-@HydrolienF 
-@william-benakli 
+@sevi2000
+
+@HydrolienF
+
+@william-benakli
