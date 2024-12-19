@@ -31,7 +31,7 @@ jobs:
     - name: Update version
       shell: bash
       run: |
-          echo -n "$(date '+%Y-%m-%d-%H-%M-%S')" > version.md
+          echo -n "$(date '+%Y.%m.%d.%H.%M.%S')" > version.md
 
     - name: Read version.md
       id: version
