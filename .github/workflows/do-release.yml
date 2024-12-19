@@ -60,7 +60,7 @@ jobs:
         echo "End of content of lib directory"
         echo "Moving jar artifact"
         echo "JAR PATH"
-        full_path = ./gradlew printJarPath | Select-String "Logged.*" | ForEach-Object { ($_ -split ":")[1].Trim() }
+        $full_path = ./gradlew printJarPath | Select-String "Logged.*" | ForEach-Object { ($_ -split ":")[1].Trim() }
         echo $full_path
         echo "END JAR PATH"
         mv $full_path ${{ env.ARTIFACT_NAME }}.jar
