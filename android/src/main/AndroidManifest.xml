@@ -1,0 +1,18 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mygdx.game">
+
+    <application
+        android:label="MyGdxGame"
+        android:icon="@drawable/ic_launcher">
+        <activity
+            android:name="com.badlogic.gdx.backends.android.AndroidApplication"
+            android:label="MyGdxGame"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
+            <meta-data android:name="android.app.lib_name" android:value="gdx" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

@@ -9,7 +9,7 @@ buildscript {
     maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
   }
   dependencies {
-
+        classpath 'com.android.tools.build:gradle:8.1.0'
 
   }
 }
@@ -25,11 +25,15 @@ allprojects {
       testOutputDir file('build/classes/java/test')
     }
   }
+  repositories {
+    google()
+    mavenCentral()
+  }
 }
 
 configure(subprojects) {
-  apply plugin: 'java-library'
-  sourceCompatibility = 17
+  //apply plugin: 'java-library'
+  //sourceCompatibility = 17
 
   // From https://lyze.dev/2021/04/29/libGDX-Internal-Assets-List/
   // The article can be helpful when using assets.txt in your project.
@@ -49,7 +53,7 @@ configure(subprojects) {
       assetsFile.append(it + "\n")
     }
   }
-  processResources.dependsOn 'generateAssetList'
+  //processResources.dependsOn 'generateAssetList'
 
   compileJava {
     options.incremental = true
