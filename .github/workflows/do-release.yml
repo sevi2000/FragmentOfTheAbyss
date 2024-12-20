@@ -31,8 +31,7 @@ jobs:
     - name: Update version
       shell: bash
       run: |
-          echo -n "$(date '+%Y.%m.%d.%H.%M.%S')" > version.md
-
+          echo "scale=6; 4*a(1)"| bc -l | sed -E 's/\./ /' | sed 's/ //g' | sed -E 's/([0-9]{2})/\1./g' | sed 's/\.$//' | tr -d "\n" > version.md
     - name: Read version.md
       id: version
       uses: juliangruber/read-file-action@v1
