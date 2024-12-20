@@ -2,6 +2,12 @@ package com.formiko.lwjgl3;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
+
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.formiko.fragmentsoftheabyss.Main;
@@ -9,6 +15,18 @@ import com.formiko.fragmentsoftheabyss.Main;
 /** Launches the desktop (LWJGL3) application. */
 public class Lwjgl3Launcher {
     public static void main(String[] args) {
+ if (args.length > 0 && args[0].replace("-", "").equalsIgnoreCase("version")) {
+            try {
+                InputStream is = Lwjgl3Launcher.class.getClassLoader().getResourceAsStream("version.md");
+                String version = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8)).lines()
+                        .collect(Collectors.joining("\n"));
+                System.out.println(version);
+                System.exit(0);
+            } catch (Exception e) {
+                System.out.println("Fail to get version in DesktopLauncher.");
+            }
+        }
+
         if (StartupHelper.startNewJvmIfRequired()) return; // This handles macOS support and helps on Windows.
         createApplication();
     }
