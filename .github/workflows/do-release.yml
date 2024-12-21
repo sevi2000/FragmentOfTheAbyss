@@ -1,75 +1,29 @@
-name: Publish release
+name: Release LibGDX Game
 
 on:
   pull_request:
-    branches: [master, main]
-    types: [closed]
-
-env:
-  JAVA_VERSION: '21'
-  JAVA_DISTRIBUTION: 'temurin'
-  JRE_VERSION: '21.0.1'
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  ARTIFACT_NAME: 'FragmentOfTheAbyss'
-  USER_NAME: 'sevi2000'
-  USER_EMAIL: 'sevidervishi@outlook.fr'
-  UUID: 'e1caab6b-1230-4691-a880-dd2d0b8ebb98'
+    branches:
+      - master
+    types:
+      - closed
 
 jobs:
-  releaseJob:
-    if: github.event.pull_request.merged == true
+  release:
     runs-on: ubuntu-latest
-    outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-      version: ${{ steps.version.outputs.content }}
+    if: github.event.pull_request.merged == true
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-java@v3
-      with:
-        distribution: ${{ env.JAVA_DISTRIBUTION }}
-        java-version: ${{ env.JAVA_VERSION }}
-    - name: Read version.md
-      id: version
-      uses: juliangruber/read-file-action@v1
-      with:
-        path: version.md
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: create release
-      shell: pwsh
-      run: |
-        echo "Move version.md to resources and create CHANGELOG.md if not exist"
-        if (!(Test-Path "src/main/resources")) {
-          mkdir -p src/main/resources
-        }
-        cp version.md src/main/resources/
-        if (!(Test-Path "CHANGELOG*")) {
-          New-Item CHANGELOG.md
-        }
-        echo "Build and move to root with desired name"
-        chmod 777 gradlew
-        ./gradlew assembleDist
-        echo $?
-        # For liftoff project
-        echo "Content of lib directory:"
-        ls lwjgl3/build/libs
-        echo "End of content of lib directory"
-        echo "Moving jar artifact"
-        echo "JAR PATH"
-        $full_path = ./gradlew printJarPath | Select-String "Logged.*" | ForEach-Object { ($_ -split ":")[1].Trim() }
-        echo $full_path
-        echo "END JAR PATH"
-        mv $full_path ${{ env.ARTIFACT_NAME }}.jar
-        # For default libgdx project
-        # mv desktop/build/libs/*.jar ${{ env.ARTIFACT_NAME }}.jar
-        ls
-    - name: Generate and upload deb in release
-      uses: sevi2000/releaseALibGdxGameToNativeExecutable@1.0.4
-      with:
-        project-name: ${{ env.ARTIFACT_NAME }}
-        user-name: ${{ env.USER_NAME }}
-        launcher-jar-version: 0.3.6
-        GITHUB_TOKEN: ${{ github.token }}
-        release-url: ${{ steps.create_release.outputs.upload_url }}
-        app-version: ${{ steps.version.outputs.content }}
-        launcher-extension: 'jar'
-        JRE_VERSION: ${{ env.JRE_VERSION }}
+      - name: Release LibGDX Game to Native Executable
+        uses: sevi2000/releaseALibGdxGameToNativeExecutable@1.0.5
+        with:
+          project-name: 'my-libgdx-game'
+          user-name: 'sevi2000'
+          launcher-jar-version: '1.0.0'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          release-url: 'https://github.com/sevi2000/my-libgdx-game/releases'
+          app-version: '1.0.0'
+          JRE_VERSION: '21.0.1'
+          JAVA_VERSION: '21'
+          JAVA_DISTRIBUTION: 'temurin'
