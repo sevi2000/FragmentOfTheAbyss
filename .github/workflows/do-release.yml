@@ -62,25 +62,8 @@ jobs:
         # For default libgdx project
         # mv desktop/build/libs/*.jar ${{ env.ARTIFACT_NAME }}.jar
         ls
-
-    - name: release
-      uses: actions/create-release@v1
-      id: create_release
-      with:
-        draft: false
-        prerelease: true
-        release_name: ${{ steps.version.outputs.content }}
-        tag_name: ${{ steps.version.outputs.content }}
-        body_path: CHANGELOG.md
-    - name: upload .jar artifact
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ${{ env.ARTIFACT_NAME }}.jar
-        asset_name: ${{ env.ARTIFACT_NAME }}.jar
-        asset_content_type: application/jar
-    - name: LauncherJar
-      uses: HydrolienF/LauncherJar@0.3.6
+    - name: Generate and upload deb in release
+      uses: sevi2000/releaseALibGdxGameToNativeExecutable@1.0.0
       with:
         project-name: ${{ env.ARTIFACT_NAME }}
         user-name: ${{ env.USER_NAME }}
@@ -90,42 +73,3 @@ jobs:
         app-version: ${{ steps.version.outputs.content }}
         launcher-extension: 'jar'
         JRE_VERSION: ${{ env.JRE_VERSION }}
-
-  LauncherJar:
-    name: 'LauncherJar ${{ matrix.os }} ${{ matrix.launcher-extension }}'
-    strategy:
-      fail-fast: false
-      matrix:
-        launcher-extension: [ deb, rpm, exe, msi, dmg, pkg ]
-        include:
-          - launcher-extension: deb
-            os: ubuntu-latest
-          - launcher-extension: rpm
-            os: ubuntu-latest
-          - launcher-extension: exe
-            os: windows-latest
-          - launcher-extension: msi
-            os: windows-latest
-          - launcher-extension: dmg
-            os: macos-latest
-          - launcher-extension: pkg
-            os: macos-latest
-    if: github.event.pull_request.merged == true
-    needs: releaseJob
-    runs-on: ${{ matrix.os }}
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: LauncherJar
-      uses: HydrolienF/LauncherJar@0.3.6
-      with:
-        project-name: ${{ env.ARTIFACT_NAME }}
-        user-name: ${{ env.USER_NAME }}
-        launcher-jar-version: 0.3.6
-        GITHUB_TOKEN: ${{ github.token }}
-        release-url: ${{ needs.releaseJob.outputs.upload_url }}
-        app-version: ${{ needs.releaseJob.outputs.version }}
-        launcher-extension: ${{ matrix.launcher-extension }}
-        uuid: ${{ env.UUID }}
-        JRE_VERSION: ${{ env.JRE_VERSION }}
-        deb-maintainer-email: ${{ env.USER_EMAIL }}
