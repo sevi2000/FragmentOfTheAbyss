@@ -63,7 +63,7 @@ jobs:
         # mv desktop/build/libs/*.jar ${{ env.ARTIFACT_NAME }}.jar
         ls
     - name: Generate and upload deb in release
-      uses: sevi2000/releaseALibGdxGameToNativeExecutable@1.0.0.4
+      uses: sevi2000/releaseALibGdxGameToNativeExecutable@1.0.4
       with:
         project-name: ${{ env.ARTIFACT_NAME }}
         user-name: ${{ env.USER_NAME }}
