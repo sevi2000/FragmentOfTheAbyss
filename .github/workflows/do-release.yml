@@ -1,29 +1,19 @@
-name: Release LibGDX Game
+name: Use Custom Java Setup Action
 
 on:
   pull_request:
+    types:
+      - merged
     branches:
       - main
-    types:
-      - closed
 
 jobs:
-  release:
+  build-and-release:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
 
-      - name: Release LibGDX Game to Native Executable
-        uses: sevi2000/releaseALibGdxGameToNativeExecutable@1.0.5
+    steps:
+      - name: Use Setup Java Action
+        uses: your-username/your-repo-name@v1 # Replace with your repo and tag
         with:
-          project-name: 'my-libgdx-game'
-          user-name: 'sevi2000'
-          launcher-jar-version: '1.0.0'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          release-url: 'https://github.com/sevi2000/my-libgdx-game/releases'
-          app-version: '1.0.0'
-          JRE_VERSION: '21.0.1'
-          JAVA_VERSION: '21'
-          JAVA_DISTRIBUTION: 'temurin'
+          distribution: 'temurin'
+          java-version: '17'
