@@ -12,8 +12,8 @@ jobs:
 
     steps:
       - name: Use Setup Java Action
-        uses: sevi2000/releaseALibGdxGameToNativeExecutable@1.0.9 # Replace with your repo and tag
+        uses: sevi2000/releaseALibGdxGameToNativeExecutable@1.0.10 # Replace with your repo and tag
         with:
           distribution: 'temurin'
           java-version: '17'
-          version: '1.0.9'
+          version: '1.0.10'
