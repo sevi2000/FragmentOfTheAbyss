@@ -2,8 +2,7 @@ name: Use Custom Java Setup Action
 
 on:
   pull_request:
-    types:
-      - merged
+    types: [closed]
     branches:
       - main
 
