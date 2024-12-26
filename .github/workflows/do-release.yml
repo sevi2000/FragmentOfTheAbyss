@@ -17,6 +17,3 @@ jobs:
           java-version: 17
           caller-github-token: ${{ github.token }}
 
-
-
-
