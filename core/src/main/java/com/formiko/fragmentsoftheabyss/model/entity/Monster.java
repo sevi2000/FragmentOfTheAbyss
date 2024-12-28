@@ -1,7 +1,10 @@
 package com.formiko.fragmentsoftheabyss.model.entity;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 
+import com.formiko.fragmentsoftheabyss.view.actors.DoorActor;
+import com.formiko.fragmentsoftheabyss.view.actors.MonsterActor;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -12,8 +15,8 @@ public class Monster extends Entity {
     private int hitRadius;
     
     @Builder
-    public Monster(int health, float x, float y, int maxHealth, int speed, float width, float height, int attack, int hitRadius) {
-        super(EntityType.MONSTER, health, x, y, maxHealth, speed, width, height);
+    public Monster(int health, float x, float y, int maxHealth, int speed, int attack, int hitRadius) {
+        super(EntityType.MONSTER, health, x, y, maxHealth, speed, 150, 200);
         this.attack = attack;
         this.hitRadius = hitRadius;
     }
@@ -28,5 +31,9 @@ public class Monster extends Entity {
             } else {
                 this.health = 0;
             }
+    }
+
+    public Actor toActor(){
+        return new MonsterActor(this);
     }
 }

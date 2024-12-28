@@ -2,7 +2,10 @@ package com.formiko.fragmentsoftheabyss.model.entity;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
+import com.formiko.fragmentsoftheabyss.view.actors.BoxActor;
 import lombok.Builder;
 
 @lombok.Getter
@@ -11,8 +14,8 @@ public class Box extends Entity{
     private static final String WALL = "Wall";
 
     @Builder
-    public Box(float x, float y, int maxHealth, float width, float height) {
-        super(EntityType.BOX, 0, x, y, maxHealth, 0,width,height);
+    public Box(float x, float y) {
+        super(EntityType.BOX, 0, x, y, 0, 0,190,190);
 
     }
     public Box(){super(EntityType.BOX,0,0,0,0,0,0,0);}
@@ -29,14 +32,10 @@ public class Box extends Entity{
         if (matcher.find()) {
             // Print the matched pattern
             // System.out.println("Match found: " + matcher.group());
-            Box box = Box.builder()
+            return Box.builder()
                     .x(Integer.parseInt(matcher.group(4)))
                     .y(Integer.parseInt(matcher.group(5)))
-                    .maxHealth(100)
-                    .width(Integer.parseInt(matcher.group(2)))
-                    .height(Integer.parseInt(matcher.group(3)))
-                .build();
-            return box;
+                    .build();
         } else {
             // System.out.println("No match found.");
             return null;
@@ -69,5 +68,8 @@ public class Box extends Entity{
             return false;
         }
         return Float.compare(box.height, height) == 0;
+    }
+    public Actor toActor(){
+        return new BoxActor(this);
     }
 }
