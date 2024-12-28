@@ -1,8 +1,11 @@
 package com.formiko.fragmentsoftheabyss.model.entity;
 
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 import com.formiko.fragmentsoftheabyss.model.enumGame.ItemType;
+import com.formiko.fragmentsoftheabyss.view.actors.DoorActor;
+import com.formiko.fragmentsoftheabyss.view.actors.ItemActor;
 import lombok.Builder;
 
 import java.util.Random;
@@ -53,6 +56,10 @@ public class Item extends Entity {
         ScheduledExecutorService observer = Executors.newSingleThreadScheduledExecutor();
         observer.schedule(item::consume, delay, TimeUnit.SECONDS);
         observer.shutdown();
-
     }
+
+    public Actor toActor(){
+        return new ItemActor(this);
+    }
+
 }

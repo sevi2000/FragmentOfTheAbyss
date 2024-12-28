@@ -1,6 +1,9 @@
 package com.formiko.fragmentsoftheabyss.model.entity;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
+import com.formiko.fragmentsoftheabyss.view.actors.DoorActor;
+import com.formiko.fragmentsoftheabyss.view.actors.PlayerActor;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -53,4 +56,7 @@ public class Player extends Entity{
         else this.health = maxHealth;
     }
 
+    public Actor toActor(){
+        return new PlayerActor(this);
+    }
 }

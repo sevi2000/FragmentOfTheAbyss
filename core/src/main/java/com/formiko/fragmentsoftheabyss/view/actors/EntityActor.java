@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.formiko.fragmentsoftheabyss.model.entity.Entity;
 import com.formiko.fragmentsoftheabyss.utils.TextureGenerator;
 import com.formiko.fragmentsoftheabyss.view.interfaceModel.ActorsEntity;
+
 public class EntityActor extends Actor implements ActorsEntity {
 
     protected Entity entity;
@@ -24,11 +25,6 @@ public class EntityActor extends Actor implements ActorsEntity {
     public Entity getEntity() {
         return entity;
     }
-    
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-         batch.draw(texture, getX()*getScaleX(), getY()*getScaleY(), getWidth()*getScaleX(), getHeight()*getScaleY());
-    }
 
     @Override
     public void act(float delta) {
@@ -40,6 +36,11 @@ public class EntityActor extends Actor implements ActorsEntity {
     public void dispose(){
         texture.dispose();
         batch.dispose();
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        batch.draw(texture, getX()*getScaleX(), getY()*getScaleY(), getWidth()*getScaleX(), getHeight()*getScaleY());
     }
 
 }

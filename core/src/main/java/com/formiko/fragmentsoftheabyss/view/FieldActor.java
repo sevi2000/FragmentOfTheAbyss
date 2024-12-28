@@ -6,12 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
 import com.formiko.fragmentsoftheabyss.Main;
-import com.formiko.fragmentsoftheabyss.model.entity.Box;
 import com.formiko.fragmentsoftheabyss.model.entity.Door;
-import com.formiko.fragmentsoftheabyss.model.entity.Player;
 import com.formiko.fragmentsoftheabyss.model.entity.Entity;
-import com.formiko.fragmentsoftheabyss.model.entity.Item;
-import com.formiko.fragmentsoftheabyss.model.entity.Monster;
 import com.formiko.fragmentsoftheabyss.model.Field;
 import com.formiko.fragmentsoftheabyss.view.actors.*;
 import com.formiko.fragmentsoftheabyss.view.interfaceModel.ActorsEntity;
@@ -24,11 +20,10 @@ public class FieldActor extends Group {
     private final Field field;
 
     public FieldActor(Field field) {
-        this.mapTexture = new Texture("textures/level" + +Main.level+"_texture.png");//TextureGenerator.getTexture(TextureGenerator.TextureType.MAP);
+        this.mapTexture = new Texture("textures/level" +Main.level+"_texture.png");//TextureGenerator.getTexture(TextureGenerator.TextureType.MAP);
         this.field = field;
         addActors();
     }
-
     /**
      * {@summary Draw the background.}
      */
@@ -46,9 +41,7 @@ public class FieldActor extends Group {
             if (entity instanceof Door door) {
                 addDoor(door);                
             } else{
-                EntityActor entityActor = new EntityActor(entity);
-                entityActor.setSize(entity.getWidth(), entity.getHeight());
-                addActor(entityActor);
+                addActor(entity.toActor());
             }
         }
     }

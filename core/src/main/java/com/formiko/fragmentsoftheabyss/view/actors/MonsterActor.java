@@ -26,8 +26,7 @@ public class MonsterActor extends EntityActor{
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(texture, getX()*getScaleX(), getY()*getScaleY(), getWidth()*getScaleX(), getHeight()*getScaleY());
-
+        super.draw(batch, parentAlpha);
         float healPercentage = (float) entity.getHealth() / entity.getMaxHealth();
 
         float barWidth = 100 * getScaleX();

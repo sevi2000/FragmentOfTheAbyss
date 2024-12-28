@@ -2,7 +2,11 @@ package com.formiko.fragmentsoftheabyss.model.entity;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
+import com.formiko.fragmentsoftheabyss.view.actors.BoxActor;
+import com.formiko.fragmentsoftheabyss.view.actors.DoorActor;
 import lombok.Builder;
 
 @lombok.Getter
@@ -29,11 +33,10 @@ public class Door extends Entity{
         if (matcher.find()) {
             // Print the matched pattern
             // System.out.println("Match found: " + matcher.group());
-            Box box = Box.builder()
+            return Box.builder()
                     .x(Integer.parseInt(matcher.group(4)))
                     .y(Integer.parseInt(matcher.group(5)))
-                .build();
-            return box;
+                    .build();
         } else {
             // System.out.println("No match found.");
             return null;
@@ -70,5 +73,9 @@ public class Door extends Entity{
 
     public void open() {
         isVisible = true;
+    }
+
+    public Actor toActor(){
+        return new DoorActor(this);
     }
 }

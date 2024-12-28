@@ -3,6 +3,7 @@ package com.formiko.fragmentsoftheabyss.model.entity;
 import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -141,6 +142,8 @@ public abstract class Entity {
     public boolean canSee(Entity target) {
         return Math.sqrt(Math.pow(target.getCenterX() - getCenterX(), 2) + Math.pow(target.getCenterY() - getCenterY(), 2)) < seeRadius;
     }
+
+    public abstract Actor toActor();
 
     public String toJson() {
         try {

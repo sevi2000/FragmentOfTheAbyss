@@ -39,7 +39,6 @@ public class PlayerActor extends EntityActor{
         float y = getY(Align.top);
 
         batch.end();
-        System.out.println("PlayerActor.draw");
         shapeRenderer.setProjectionMatrix(GameScreen.getCamera().combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.RED);

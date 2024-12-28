@@ -1,7 +1,10 @@
 package com.formiko.fragmentsoftheabyss.model.entity;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 
+import com.formiko.fragmentsoftheabyss.view.actors.DoorActor;
+import com.formiko.fragmentsoftheabyss.view.actors.MonsterActor;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -28,5 +31,9 @@ public class Monster extends Entity {
             } else {
                 this.health = 0;
             }
+    }
+
+    public Actor toActor(){
+        return new MonsterActor(this);
     }
 }
