@@ -3,12 +3,16 @@ package com.formiko.fragmentsoftheabyss.model.entity;
 import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.formiko.fragmentsoftheabyss.controller.GameController;
 import com.formiko.fragmentsoftheabyss.model.Coordinates;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 import com.formiko.fragmentsoftheabyss.utils.AStar;
+import com.formiko.fragmentsoftheabyss.utils.Parser;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,10 +23,12 @@ import lombok.Setter;
     property = "type"
 )
 @JsonSubTypes({
-    @JsonSubTypes.Type(value = Box.class, name = "BOX"),
-    @JsonSubTypes.Type(value = Player.class, name = "PLAYER"),
-    @JsonSubTypes.Type(value = Monster.class, name = "MONSTER"),
-    @JsonSubTypes.Type(value = Door.class, name = "DOOR")
+        @JsonSubTypes.Type(value = Box.class, name = "BOX"),
+        @JsonSubTypes.Type(value = Player.class, name = "PLAYER"),
+        @JsonSubTypes.Type(value = Monster.class, name = "MONSTER"),
+        @JsonSubTypes.Type(value = Door.class, name = "DOOR"),
+        @JsonSubTypes.Type(value = Item.class, name = "ITEM")
+
 })
 @AllArgsConstructor
 @Getter
@@ -62,7 +68,7 @@ public abstract class Entity {
         this.y += deltaY * speed;
 
         moveInsideScreenIfNeeded();
-        // Gdx.app.log("Entity", "Move of " + deltaX + " " + deltaY + " " + speed + " in "+ Gdx.graphics.getWidth() + " " + Gdx.graphics.getHeight());
+        //Gdx.app.log("Entity", "Move of " + deltaX + " " + deltaY + " " + speed + " in "+ Gdx.graphics.getWidth() + " " + Gdx.graphics.getHeight());
     }
 
     private long lastTimePathCalculate;
@@ -135,5 +141,17 @@ public abstract class Entity {
     }
     public boolean canSee(Entity target) {
         return Math.sqrt(Math.pow(target.getCenterX() - getCenterX(), 2) + Math.pow(target.getCenterY() - getCenterY(), 2)) < seeRadius;
+    }
+
+    public abstract Actor toActor();
+
+    public String toJson() {
+        try {
+            return Parser.getObjectMapper().writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return "";
     }
 }

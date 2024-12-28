@@ -2,6 +2,8 @@ package com.formiko.fragmentsoftheabyss.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import com.badlogic.gdx.Gdx;
 import com.formiko.fragmentsoftheabyss.model.entity.Door;
 import com.formiko.fragmentsoftheabyss.model.entity.Entity;
@@ -10,32 +12,19 @@ import com.formiko.fragmentsoftheabyss.model.entity.Player;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
 import com.formiko.fragmentsoftheabyss.utils.Parser;
 
-@lombok.Data
 @lombok.AllArgsConstructor
 @lombok.Builder
 @lombok.Getter
 public class Field {
 
+    private int width;
+    private int height;
+    private ArrayList<Entity> listEntityOnField;
 
-   private Player player;
-   
-   private int width;
-   private int height;
-   private final ArrayList<Entity> listEntityOnField;
    public Field() {
-      this.listEntityOnField = new ArrayList<>();
-      this.player = Player.builder()
-      .x(100)
-      .y(100)
-      .maxHealth(100)
-      .width(50)
-      .height(50)
-      .hitRadius(100)
-      .build();
-      Door door = Door.builder().x(200).y(200).width(100).height(100).build();
-      listEntityOnField.add(door);
+       listEntityOnField = new ArrayList<>();
    }
-        
+
    public String toJson() {
        try {
             return Parser.getObjectMapper().writeValueAsString(this);
@@ -47,7 +36,6 @@ public class Field {
     public static Field fromJson(String json) {
       try {
           Field f = Parser.getObjectMapper().readValue(json, Field.class);
-          f.listEntityOnField.add(f.player);
           return f;
       } catch (Exception e) {
           throw new IllegalArgumentException("Flag.fromJson(): " + e.getMessage());
@@ -88,4 +76,13 @@ public void openDoor() {
 public Door getDoor() {
    return (Door) listEntityOnField.stream().filter(e -> e.getId() == EntityType.DOOR).findFirst().orElse(null); 
 }
+
+    public Optional<Player> getPlayer() {
+        for(Entity entity: getListEntityOnField()){
+            if(entity instanceof Player player){
+                return Optional.of(player);
+            }
+        }
+        return Optional.empty();
+    }
 }

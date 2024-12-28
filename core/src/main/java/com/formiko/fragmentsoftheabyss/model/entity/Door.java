@@ -2,7 +2,11 @@ package com.formiko.fragmentsoftheabyss.model.entity;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
+import com.formiko.fragmentsoftheabyss.view.actors.BoxActor;
+import com.formiko.fragmentsoftheabyss.view.actors.DoorActor;
 import lombok.Builder;
 
 @lombok.Getter
@@ -11,8 +15,8 @@ public class Door extends Entity{
     private static final String WALL = "Wall";
     private boolean isVisible = false;
     @Builder
-    public Door(float x, float y, int maxHealth, float width, float height) {
-        super(EntityType.DOOR, 0, x, y, maxHealth, 0,width,height);
+    public Door(float x, float y) {
+        super(EntityType.DOOR, 0, x, y, 0, 0,200,250);
         this.isVisible = false;
     }
     public Door(){super(EntityType.BOX,0,0,0,0,0,0,0);}
@@ -29,14 +33,10 @@ public class Door extends Entity{
         if (matcher.find()) {
             // Print the matched pattern
             // System.out.println("Match found: " + matcher.group());
-            Box box = Box.builder()
+            return Box.builder()
                     .x(Integer.parseInt(matcher.group(4)))
                     .y(Integer.parseInt(matcher.group(5)))
-                    .maxHealth(100)
-                    .width(Integer.parseInt(matcher.group(2)))
-                    .height(Integer.parseInt(matcher.group(3)))
-                .build();
-            return box;
+                    .build();
         } else {
             // System.out.println("No match found.");
             return null;
@@ -57,7 +57,7 @@ public class Door extends Entity{
             return false;
         }
 
-        Box box = (Box) o;
+        Door box = (Door) o;
 
         if (Float.compare(box.x, x) != 0) {
             return false;
@@ -73,5 +73,9 @@ public class Door extends Entity{
 
     public void open() {
         isVisible = true;
+    }
+
+    public Actor toActor(){
+        return new DoorActor(this);
     }
 }

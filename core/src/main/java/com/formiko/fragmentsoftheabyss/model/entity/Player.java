@@ -1,8 +1,9 @@
 package com.formiko.fragmentsoftheabyss.model.entity;
 
-import java.util.regex.Matcher;
-
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.formiko.fragmentsoftheabyss.model.enumGame.EntityType;
+import com.formiko.fragmentsoftheabyss.view.actors.DoorActor;
+import com.formiko.fragmentsoftheabyss.view.actors.PlayerActor;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -24,8 +25,8 @@ public class Player extends Entity{
     private final int hitRadius;
 
     @Builder
-    public Player(EntityType id, int health, float x, float y, int maxHealth, int speed, String name, int experience, int gold, int attack, int defense, float width, float height, int hitRadius) {
-        super(id, health, x, y, maxHealth, speed,width,height);
+    public Player(int health, float x, float y, int maxHealth, int speed, String name, int experience, int gold, int attack, int defense, int hitRadius) {
+        super(EntityType.PLAYER, health, x, y, maxHealth, speed,150,200);
         this.experience = experience;
         this.gold = gold;
         this.attack = attack;
@@ -55,4 +56,7 @@ public class Player extends Entity{
         else this.health = maxHealth;
     }
 
+    public Actor toActor(){
+        return new PlayerActor(this);
+    }
 }
